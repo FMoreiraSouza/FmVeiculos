@@ -1,7 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.FMVeiculos" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Primary brand color for night mode -->
+<!--        <item name="colorPrimary">#333333</item>-->
+<!--        <item name="colorPrimaryDark">#333333</item>-->
+<!--        <item name="colorAccent">#FF4444</item>-->
+        <!-- Customize your night mode theme here -->
     </style>
 </resources>

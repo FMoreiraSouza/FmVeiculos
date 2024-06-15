@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "52243006118",
+    "project_id": "fmveiculos-c2485",
+    "storage_bucket": "fmveiculos-c2485.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52243006118:android:720f76d15fcd30b684ea67",
+        "android_client_info": {
+          "package_name": "com.example.fmveiculos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRJ04Vxzwxz-I3zMvtRg-9IPoHwedBoSo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
