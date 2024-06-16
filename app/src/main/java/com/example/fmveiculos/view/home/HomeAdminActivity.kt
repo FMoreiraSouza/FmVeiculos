@@ -15,8 +15,11 @@ import com.example.fmveiculos.R
 import com.example.fmveiculos.view.auth.LoginActivity
 import com.example.fmveiculos.viewModel.home.SquareAdapter
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeAdminActivity : AppCompatActivity() {
+
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +38,7 @@ class HomeAdminActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_logout -> {
+                    auth.signOut()
                     val intent = Intent(this@HomeAdminActivity, LoginActivity::class.java)
                     startActivity(intent)
                     finish()

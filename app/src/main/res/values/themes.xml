@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.FMVeiculos" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color -->
-<!--        <item name="colorPrimary">#808080</item>-->
-<!--        <item name="colorPrimaryDark">#808080</item>-->
-<!--        <item name="colorAccent">#FF0000</item>-->
+        <item name="colorPrimary">#808080</item>
+        <item name="colorPrimaryDark">#808080</item>
+        <item name="colorAccent">#FF0000</item>
         <!-- Customize your theme here -->
     </style>
 

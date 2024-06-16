@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.auth.LoginActivity">
 
     <!-- AppBar -->
@@ -17,11 +17,11 @@
             android:id="@+id/toolbar_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Cadastro"
             android:textColor="@color/metallic_gray"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center" />
+            android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
     <!-- Formulário de Cadastro -->
@@ -63,6 +63,19 @@
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Campo Senha -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextSenha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Senha" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!-- Campo CPF -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -77,82 +90,31 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo Logradouro -->
+            <!-- Campo CEP -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextLogradouro"
+                    android:id="@+id/editTextCEP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Logradouro" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Campo Número de Residência -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextNumeroResidencia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Número de residência"
+                    android:hint="CEP"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo Bairro -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextBairro"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Bairro" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Campo Cidade -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextCidade"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Cidade" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Campo Estado -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextEstado"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Estado" />
-            </com.google.android.material.textfield.TextInputLayout>
-
             <!-- Botão de Cadastro -->
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
+                android:id="@+id/buttonFinishRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cadastrar"
-                android:textColor="@android:color/white"
-                android:background="@color/colorPrimary"
                 android:layout_marginTop="16dp"
+                android:background="@color/colorPrimary"
                 android:padding="12dp"
-                android:textAllCaps="false" />
+                android:text="Cadastrar"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white" />
         </LinearLayout>
     </ScrollView>
 

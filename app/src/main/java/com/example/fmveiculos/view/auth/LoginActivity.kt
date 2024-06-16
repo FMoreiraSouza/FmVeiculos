@@ -1,5 +1,6 @@
 package com.example.fmveiculos.view.auth
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -14,6 +15,7 @@ import com.example.fmveiculos.view.home.HomeAdminActivity
 import com.example.fmveiculos.view.home.HomeClientActivity
 import com.example.fmveiculos.viewModel.auth.LoginViewModel
 import com.example.fmveiculos.utils.setupUI
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
@@ -23,8 +25,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var registerButton: TextView
     private lateinit var dealershipName: TextView
     private lateinit var loginClient: TextView
-
     private lateinit var viewModel: LoginViewModel
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +34,11 @@ class LoginActivity : AppCompatActivity() {
         var email: String
         var password: String
 
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        firebaseAuth = FirebaseAuth.getInstance()
 
+
+
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         emailField = findViewById(R.id.emailField)
         passwordField = findViewById(R.id.passwordField)
@@ -54,26 +59,58 @@ class LoginActivity : AppCompatActivity() {
             Navigator().navigateToActivity(this, RegisterActivity::class.java)
         }
         observeViewModel()
-
     }
+
+    override fun onStart() {
+        super.onStart()
+        val cameFromRegister = intent.getBooleanExtra("CAME_FROM_REGISTER", false)
+        if (!cameFromRegister) {
+            val isFirstLogin = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                .getBoolean("is_first_login", true)
+            if (!isFirstLogin) {
+                viewModel.checkLoggedUser()
+            }
+        }
+    }
+
 
     private fun observeViewModel() {
         val loginObserver = Observer<Boolean> { success ->
             if (success) {
-                val email = emailField.text.toString()
-                if (email.endsWith("@fmveiculos.com")) {
-                    Toast.makeText(this, "Login bem sucedido", Toast.LENGTH_LONG).show()
-                    Navigator().navigateToActivity(this, HomeAdminActivity::class.java)
-                } else {
-                    Toast.makeText(this, "Login bem sucedido como cliente", Toast.LENGTH_LONG)
-                        .show()
-                    Navigator().navigateToActivity(this, HomeClientActivity::class.java)
-                }
+                setFirstLoginFlag(false)
+                redirectToHome()
+                Toast.makeText(this, "Login bem sucedido!", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, "Credenciais inválidas", Toast.LENGTH_LONG).show()
             }
         }
         viewModel.loginResult.observe(this, loginObserver)
+
+        val loggedUserObserver = Observer<Boolean>{success->
+            if(success){
+                redirectToHome()
+            }
+        }
+        viewModel.navigateToHome.observe(this, loggedUserObserver)
     }
 
+    private fun redirectToHome() {
+        val user = firebaseAuth.currentUser
+        if (user != null) {
+            val email = user.email
+            if (email != null && email.endsWith("@fmveiculos.com")) {
+                Navigator().navigateToActivity(this, HomeAdminActivity::class.java)
+            } else {
+                Navigator().navigateToActivity(this, HomeClientActivity::class.java)
+            }
+        }
+    }
+
+    private fun setFirstLoginFlag(isFirstLogin: Boolean) {
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putBoolean("is_first_login", isFirstLogin)
+            apply()
+        }
+    }
 }
