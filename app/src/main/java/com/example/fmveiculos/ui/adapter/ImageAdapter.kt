@@ -1,7 +1,8 @@
-package com.example.fmveiculos.viewModel.home
+package com.example.fmveiculos.ui.adapter
 
 import CarModel
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.fmveiculos.R
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ImageAdapter(private val context: Context) : BaseAdapter() {
+class ImageAdapter(private val context: Context, private val hasWhatsappLayout: Boolean) : BaseAdapter() {
 
     private val carList = mutableListOf<CarModel>()
     private val firestore = FirebaseFirestore.getInstance()
@@ -31,6 +32,7 @@ class ImageAdapter(private val context: Context) : BaseAdapter() {
                 notifyDataSetChanged()
             }
             .addOnFailureListener { exception ->
+                Log.e("ImageAdapter", "Error fetching data", exception)
             }
     }
 
@@ -46,24 +48,37 @@ class ImageAdapter(private val context: Context) : BaseAdapter() {
         return position.toLong()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         var view = convertView
         val viewHolder: ViewHolder
 
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.grid_item_layout, parent, false)
-            viewHolder = ViewHolder(view)
-            view.tag = viewHolder
+            try {
+                Log.d("ImageAdapter", "Inflating new view for position $position")
+                view = LayoutInflater.from(context).inflate(R.layout.grid_item_layout, parent, false)
+                viewHolder = ViewHolder(view)
+                view.tag = viewHolder
+                Log.d("ImageAdapter", "View inflated successfully for position $position")
+            } catch (e: Exception) {
+                Log.e("ImageAdapter", "Error inflating view", e)
+                return null
+            }
         } else {
             viewHolder = view.tag as ViewHolder
         }
 
-        val car = getItem(position) as CarModel
-        viewHolder.bind(car)
+        try {
+            val car = getItem(position) as CarModel
+            viewHolder.bind(car)
 
-        view!!.setOnClickListener {
-            val intent = CarModel.createIntent(context, car)
-            context.startActivity(intent)
+            if (view != null) {
+                view.setOnClickListener {
+                    val intent = CarModel.createIntent(context, car, hasWhatsappLayout)
+                    context.startActivity(intent)
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("ImageAdapter", "Error binding view", e)
         }
 
         return view
@@ -74,11 +89,14 @@ class ImageAdapter(private val context: Context) : BaseAdapter() {
         val carName: TextView = view.findViewById(R.id.carNameTextView)
 
         fun bind(car: CarModel) {
-            Glide.with(carImage.context)
-                .load(car.imageResource)
-                .into(carImage)
-
-            carName.text = car.name
+            try {
+                Glide.with(carImage.context)
+                    .load(car.imageResource)
+                    .into(carImage)
+                carName.text = car.name
+            } catch (e: Exception) {
+                Log.e("ViewHolder", "Error binding data", e)
+            }
         }
     }
 }

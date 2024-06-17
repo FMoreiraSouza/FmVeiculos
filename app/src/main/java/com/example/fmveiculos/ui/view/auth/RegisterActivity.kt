@@ -1,7 +1,6 @@
-package com.example.fmveiculos.view.auth
+package com.example.fmveiculos.ui.view.auth
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText

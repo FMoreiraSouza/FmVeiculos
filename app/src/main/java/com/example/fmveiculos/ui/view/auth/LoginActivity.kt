@@ -1,4 +1,4 @@
-package com.example.fmveiculos.view.auth
+package com.example.fmveiculos.ui.view.auth
 
 import android.content.Context
 import android.os.Bundle
@@ -11,8 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.fmveiculos.R
 import com.example.fmveiculos.utils.Navigator
-import com.example.fmveiculos.view.home.HomeAdminActivity
-import com.example.fmveiculos.view.home.HomeClientActivity
+import com.example.fmveiculos.ui.view.home.HomeAdminActivity
+import com.example.fmveiculos.ui.view.home.HomeClientActivity
 import com.example.fmveiculos.viewModel.auth.LoginViewModel
 import com.example.fmveiculos.utils.setupUI
 import com.google.firebase.auth.FirebaseAuth

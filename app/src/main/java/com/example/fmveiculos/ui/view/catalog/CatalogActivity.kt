@@ -1,6 +1,5 @@
-package com.example.fmveiculos.view.home
-import com.example.fmveiculos.viewModel.home.ImageAdapter
-import android.annotation.SuppressLint
+package com.example.fmveiculos.ui.view.catalog
+
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -13,17 +12,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.fmveiculos.R
-import com.example.fmveiculos.view.auth.LoginActivity
-
+import com.example.fmveiculos.ui.adapter.ImageAdapter
+import com.example.fmveiculos.ui.view.auth.LoginActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
-
-class HomeClientActivity : AppCompatActivity() {
+class CatalogActivity : AppCompatActivity() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client_home)
@@ -42,7 +39,7 @@ class HomeClientActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.action_logout -> {
                     auth.signOut()
-                    val intent = Intent(this@HomeClientActivity, LoginActivity::class.java)
+                    val intent = Intent(this@CatalogActivity, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
@@ -60,7 +57,7 @@ class HomeClientActivity : AppCompatActivity() {
         logoText.setText(spannable, TextView.BufferType.SPANNABLE)
 
         val gridView: GridView = findViewById(R.id.vehiclesGridView)
-        val adapter = ImageAdapter(this)
+        val adapter = ImageAdapter(this, false)
         gridView.adapter = adapter
     }
 }

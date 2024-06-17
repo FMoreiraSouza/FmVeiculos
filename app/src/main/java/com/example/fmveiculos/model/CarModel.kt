@@ -1,6 +1,7 @@
 import android.content.Context
 import android.content.Intent
-import com.example.fmveiculos.view.dealership.CarDetailsActivity
+import com.example.fmveiculos.ui.view.dealership.CarDetailsClientActivity
+import com.example.fmveiculos.ui.view.dealership.CarDetailsHomeActivity
 
 data class CarModel(
     var name: String = "",
@@ -13,17 +14,22 @@ data class CarModel(
     var quantity: Int = 0
 ) {
     companion object {
-        fun createIntent(context: Context, car: CarModel): Intent {
-            val intent = Intent(context, CarDetailsActivity::class.java)
-            intent.putExtra("carImage", car.imageResource)
-            intent.putExtra("carName", car.name)
-            intent.putExtra("carDescription", car.description)
-            intent.putExtra("carPrice", car.price)
-            intent.putExtra("carCategory", car.category)
-            intent.putExtra("carBrand", car.brand)
-            intent.putExtra("carReleaseYear", car.releaseYear)
-            intent.putExtra("carQuantity", car.quantity)
-            return intent
+        fun createIntent(context: Context, car: CarModel, hasWhatsAppLayout: Boolean): Intent {
+            return if (!hasWhatsAppLayout) {
+                Intent(context, CarDetailsHomeActivity::class.java)
+            } else {
+                Intent(context, CarDetailsClientActivity::class.java)
+            }.apply {
+                // Adiciona os dados do carro ao intent
+                putExtra("carImage", car.imageResource)
+                putExtra("carName", car.name)
+                putExtra("carDescription", car.description)
+                putExtra("carPrice", car.price)
+                putExtra("carCategory", car.category)
+                putExtra("carBrand", car.brand)
+                putExtra("carReleaseYear", car.releaseYear)
+                putExtra("carQuantity", car.quantity)
+            }
         }
     }
 }

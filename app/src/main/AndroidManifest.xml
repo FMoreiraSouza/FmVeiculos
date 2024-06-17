@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- Permissões necessárias -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,17 +15,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FMVeiculos"
         tools:targetApi="31">
-        <activity android:name=".view.auth.RegisterActivity" />
-        <activity android:name=".view.interests.InterestActivity" />
-        <activity android:name=".view.dashboard.DashboardActivity" />
-        <activity android:name=".view.catalog.CatalogActivity" />
-        <activity android:name=".view.restocking.RestockingActivity" />
-        <activity android:name=".view.dealership.CarDetailsActivity" />
-        <activity android:name=".view.home.HomeClientActivity" />
-        <activity android:name=".view.home.HomeAdminActivity" />
         <activity
-            android:name=".view.auth.LoginActivity"
-            android:exported="true" >
+            android:name=".ui.view.dealership.CarDetailsHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.dealership.CarDetailsHomeActivity"
+            android:exported="false" />
+        <activity android:name=".ui.view.auth.RegisterActivity" />
+        <activity android:name=".ui.view.interests.InterestActivity" />
+        <activity android:name=".ui.view.dashboard.DashboardActivity" />
+        <activity android:name=".ui.view.catalog.CatalogActivity" />
+        <activity android:name=".ui.view.restocking.RestockingActivity" />
+        <activity android:name=".ui.view.dealership.CarDetailsClientActivity" />
+        <activity android:name=".ui.view.home.HomeClientActivity" />
+        <activity android:name=".ui.view.home.HomeAdminActivity" />
+        <activity
+            android:name=".ui.view.auth.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

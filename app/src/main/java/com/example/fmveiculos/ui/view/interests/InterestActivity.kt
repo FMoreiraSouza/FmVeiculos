@@ -1,4 +1,4 @@
-package com.example.fmveiculos.view.interests
+package com.example.fmveiculos.ui.view.interests
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

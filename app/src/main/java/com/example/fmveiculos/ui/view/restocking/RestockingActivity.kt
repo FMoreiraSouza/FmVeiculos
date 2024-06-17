@@ -1,4 +1,4 @@
-package com.example.fmveiculos.view.restocking
+package com.example.fmveiculos.ui.view.restocking
 
 import CarModel
 import android.content.Intent
@@ -13,9 +13,14 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import com.example.fmveiculos.R
+import com.example.fmveiculos.utils.Navigator
+import com.example.fmveiculos.ui.view.home.HomeAdminActivity
 import com.example.fmveiculos.viewModel.restocking.RestockingViewModel
+import com.google.android.material.navigation.NavigationView
 
 class RestockingActivity : AppCompatActivity() {
 
@@ -53,6 +58,14 @@ class RestockingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_restocking)
 
         restockingViewModel = ViewModelProvider(this).get(RestockingViewModel::class.java)
+
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        val navigationView = findViewById<NavigationView>(R.id.navigationView)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.openDrawer(navigationView)
+        }
 
         val editTextNome = findViewById<EditText>(R.id.editTextNome)
         val editTextDescricao = findViewById<EditText>(R.id.editTextDescricao)
@@ -92,6 +105,7 @@ class RestockingActivity : AppCompatActivity() {
                 restockingViewModel.uploadImageAndSaveCar(car,
                     onSuccess = {
                         Toast.makeText(this, "Carro salvo com sucesso", Toast.LENGTH_LONG).show()
+                        Navigator().navigateToActivity(this, HomeAdminActivity::class.java)
                     },
                     onFailure = { errorMessage ->
                         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()

@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF0000</color>
     <color name="colorContrast">#000000</color>
     <color name="metallic_gray">#A9A9A9</color>
+    <color name="metallic_red">#FF4500</color>
 </resources>

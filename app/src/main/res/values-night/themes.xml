@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.FMVeiculos" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color for night mode -->
-<!--        <item name="colorPrimary">#333333</item>-->
-<!--        <item name="colorPrimaryDark">#333333</item>-->
-<!--        <item name="colorAccent">#FF4444</item>-->
+        <item name="colorPrimary">#333333</item>
+        <item name="colorPrimaryDark">#333333</item>
+        <item name="colorAccent">#FF4444</item>
         <!-- Customize your night mode theme here -->
     </style>
 </resources>

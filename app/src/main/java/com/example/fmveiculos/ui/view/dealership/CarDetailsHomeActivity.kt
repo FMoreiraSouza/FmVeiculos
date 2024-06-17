@@ -1,4 +1,4 @@
-package com.example.fmveiculos.view.dealership
+package com.example.fmveiculos.ui.view.dealership
 
 import android.annotation.SuppressLint
 import android.graphics.Typeface
@@ -8,16 +8,20 @@ import android.text.Spanned
 import android.text.style.StyleSpan
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.example.fmveiculos.R
 
-class CarDetailsActivity : AppCompatActivity() {
+class CarDetailsHomeActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_car_details)
+        setContentView(R.layout.activity_car_details_home)
 
-        val carImageResource = intent.getIntExtra("carImage",0)
+        val carImageResource = intent.getStringExtra("carImage")
         val carName = intent.getStringExtra("carName")
         val carBrand = intent.getStringExtra("carBrand")
         val carQuantity = intent.getIntExtra("carQuantity", 0)
@@ -33,7 +37,11 @@ class CarDetailsActivity : AppCompatActivity() {
         val carDescriptionTextView = findViewById<TextView>(R.id.carDescriptionTextView)
         val carCategoryTextView = findViewById<TextView>(R.id.carCategoryTextView)
 
-        carImageView.setImageResource(carImageResource)
+        Glide.with(this)
+            .load(carImageResource)
+            .fitCenter() // Ajusta a imagem para caber centralizada no ImageView
+            .into(carImageView)
+
         carNameTextView.text = createStyledText("", carName)
         carBrandTextView.text = createStyledText("Marca: ", carBrand)
         carDescriptionTextView.text = createStyledText("Descrição\n", carDescription)
@@ -41,6 +49,7 @@ class CarDetailsActivity : AppCompatActivity() {
         carCategoryTextView.text = createStyledText("Categoria: ", carCategory)
         carPriceTextView.text = createStyledText("Preço: R$ ", String.format("%.3f", carPrice))
     }
+
     private fun createStyledText(label: String, value: String?): SpannableString {
         val spannableString = SpannableString("$label$value")
         spannableString.setSpan(

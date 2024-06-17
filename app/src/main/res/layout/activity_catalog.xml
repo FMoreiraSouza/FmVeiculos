@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".view.catalog.CatalogActivity">
+    tools:context=".ui.view.catalog.CatalogActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
         </androidx.appcompat.widget.Toolbar>
 
         <GridView
-            android:id="@+id/vehiclesGridView"
+            android:id="@+id/vehiclesHomeGridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/toolbar"

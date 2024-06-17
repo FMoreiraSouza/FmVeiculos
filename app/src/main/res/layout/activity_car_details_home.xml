@@ -1,97 +1,85 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white"
-    android:gravity="top">
+    android:gravity="top"
+    android:orientation="vertical"
+    tools:context=".ui.view.dealership.CarDetailsHomeActivity">
 
     <TextView
         android:id="@+id/carNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="40sp"
-        android:textStyle="bold"
+        android:layout_marginTop="8dp"
         android:textColor="@android:color/black"
-        android:layout_marginTop="8dp"/>
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
     <ImageView
         android:id="@+id/carImageView"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerInside"
+        android:layout_margin="16dp"
         android:adjustViewBounds="true"
-        android:layout_margin="16dp"/>
+        android:scaleType="centerInside" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/carCategoryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/carBrandTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:layout_marginStart="16dp"
             android:textColor="@android:color/black"
-            android:layout_marginStart="16dp"/>
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/carQuantityTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/carPriceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:layout_marginStart="16dp"
             android:textColor="@android:color/black"
-            android:layout_marginStart="16dp"/>
+            android:textSize="20sp" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/carDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="8dp"
-        android:justificationMode="inter_word"
         android:layout_margin="16dp"
+        android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-         />
-
-    <Button
-        android:id="@+id/contactButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/whatsapp_button_background"
-        android:drawableStart="@drawable/ic_whatsapp"
-        android:drawablePadding="8dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="Entrar em contato"
-        android:textColor="@android:color/white"
-        android:textSize="16sp" />
+        android:justificationMode="inter_word"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
 </LinearLayout>

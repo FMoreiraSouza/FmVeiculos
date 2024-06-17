@@ -1,4 +1,4 @@
-package com.example.fmveiculos.view.dashboard
+package com.example.fmveiculos.ui.view.dashboard
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

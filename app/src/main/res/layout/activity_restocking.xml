@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!-- Toolbar -->
@@ -10,9 +10,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorAccent"
         android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:navigationIcon="@drawable/bar_menu_icon">
 
         <!-- TextView para o título -->
         <TextView
@@ -21,121 +22,129 @@
             android:layout_height="wrap_content"
             android:text="Reposição"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
     </androidx.appcompat.widget.Toolbar>
 
-
-    <!-- Container para os campos -->
-    <LinearLayout
+    <!-- Adicionar ScrollView -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
-        <!-- Campos de entrada -->
-        <EditText
-            android:id="@+id/editTextNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nome do Produto"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/editTextDescricao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Descrição"
-            android:inputType="textMultiLine" />
-
-        <EditText
-            android:id="@+id/editTextPreco"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Preço"
-            android:inputType="numberDecimal" />
-
-        <EditText
-            android:id="@+id/editTextMarca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Marca"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/editTextCategoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Categoria"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/editTextAnoLancamento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ano de Lançamento"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/editTextQuantidade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Quantidade"
-            android:inputType="number" />
-
-        <!-- ImageView para a imagem do produto -->
-        <ImageView
-            android:id="@+id/imageViewProduto"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:contentDescription="Imagem do Produto"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/galeria" />
-
-        <!-- Botões para escolher imagem da galeria ou da câmera -->
+        <!-- Container para os campos -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-            <ImageButton
-                android:id="@+id/btnCamera"
-                android:layout_width="wrap_content"
+            <!-- Campos de entrada -->
+            <EditText
+                android:id="@+id/editTextNome"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btnGaleria"
-                app:layout_constraintTop_toBottomOf="@+id/imageSelecionada"
-                app:srcCompat="@drawable/ic_camera_24" />
+                android:hint="Nome do Produto"
+                android:inputType="text" />
 
-            <ImageButton
-                android:id="@+id/btnGaleria"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/editTextDescricao"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/btnCamera"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageSelecionada"
-                app:srcCompat="@drawable/ic_gallery_24" />
+                android:hint="Descrição"
+                android:inputType="textMultiLine" />
 
-        <Button
-            android:id="@+id/btnFinalizarReposicao"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="8dp"
-            android:text="Finalizar Reposição" />
+            <EditText
+                android:id="@+id/editTextPreco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Preço"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/editTextMarca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Marca"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/editTextCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Categoria"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/editTextAnoLancamento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ano de Lançamento"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editTextQuantidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Quantidade"
+                android:inputType="number" />
+
+            <!-- ImageView para a imagem do produto -->
+            <ImageView
+                android:id="@+id/imageViewProduto"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:contentDescription="Imagem do Produto"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/galeria" />
+
+            <!-- Botões para escolher imagem da galeria ou da câmera -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnCamera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btnGaleria"
+                    app:layout_constraintTop_toBottomOf="@+id/imageSelecionada"
+                    app:srcCompat="@drawable/ic_camera_24" />
+
+                <ImageButton
+                    android:id="@+id/btnGaleria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnCamera"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageSelecionada"
+                    app:srcCompat="@drawable/ic_gallery_24" />
+
+                <Button
+                    android:id="@+id/btnFinalizarReposicao"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="8dp"
+                    android:text="Finalizar Reposição"
+                    android:textColor="#FFFFFF"/>
+            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

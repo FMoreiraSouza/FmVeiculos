@@ -1,4 +1,4 @@
-package com.example.fmveiculos.viewModel.home
+package com.example.fmveiculos.ui.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -11,8 +11,8 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.fmveiculos.R
-import com.example.fmveiculos.view.catalog.CatalogActivity
-import com.example.fmveiculos.view.restocking.RestockingActivity
+import com.example.fmveiculos.ui.view.catalog.CatalogActivity
+import com.example.fmveiculos.ui.view.restocking.RestockingActivity
 
 
 class SquareAdapter(private val context: Context) : BaseAdapter() {
