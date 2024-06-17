@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".ui.view.restocking.RestockingActivity">
 
-    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,7 +16,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:navigationIcon="@drawable/bar_menu_icon">
 
-        <!-- TextView para o título -->
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
@@ -28,14 +28,12 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Adicionar ScrollView -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:fillViewport="true">
 
-        <!-- Container para os campos -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +41,6 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <!-- Campos de entrada -->
             <EditText
                 android:id="@+id/editTextNome"
                 android:layout_width="match_parent"
@@ -93,7 +90,6 @@
                 android:hint="Quantidade"
                 android:inputType="number" />
 
-            <!-- ImageView para a imagem do produto -->
             <ImageView
                 android:id="@+id/imageViewProduto"
                 android:layout_width="match_parent"
@@ -102,7 +98,6 @@
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/galeria" />
 
-            <!-- Botões para escolher imagem da galeria ou da câmera -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

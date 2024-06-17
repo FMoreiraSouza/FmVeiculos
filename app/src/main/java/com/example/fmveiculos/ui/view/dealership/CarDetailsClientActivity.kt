@@ -1,6 +1,7 @@
 package com.example.fmveiculos.ui.view.dealership
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.icu.util.Calendar
@@ -9,6 +10,7 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.StyleSpan
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -31,6 +33,7 @@ class CarDetailsClientActivity : AppCompatActivity() {
         setContentView(R.layout.activity_car_details_client)
 
         auth = FirebaseAuth.getInstance()
+
 
         val carImageResource = intent.getStringExtra("carImage")
         val carName = intent.getStringExtra("carName")
@@ -60,7 +63,7 @@ class CarDetailsClientActivity : AppCompatActivity() {
         carDescriptionTextView.text = createStyledText("Descrição\n", carDescription)
         carQuantityTextView.text = createStyledText("Disponíveis: ", carQuantity.toString())
         carCategoryTextView.text = createStyledText("Categoria: ", carCategory)
-        carPriceTextView.text = createStyledText("Preço: R$ ", String.format("%.3f", carPrice))
+        carPriceTextView.text = createStyledText("Preço: R$ ", String.format("%.2f", carPrice))
 
         whatsappLayout.setOnClickListener {
             openWhatsApp()
@@ -91,8 +94,10 @@ class CarDetailsClientActivity : AppCompatActivity() {
 
     fun confirmInterest() {
         val currentUser = auth.currentUser
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+
         if (currentUser != null) {
-            val clientName = currentUser.displayName ?: "Nome não disponível"
+            val clientName = sharedPreferences.getString("client_name", "Nome não disponível") ?: "Nome não disponível"
             val carName = intent.getStringExtra("carName")
             val carPrice = intent.getDoubleExtra("carPrice", 0.0)
             val timestamp = Calendar.getInstance().time.toString()
@@ -103,6 +108,9 @@ class CarDetailsClientActivity : AppCompatActivity() {
                 "carPrice" to carPrice,
                 "timestamp" to timestamp
             )
+
+            Log.d("clientName", "Nome do cliente obtido: $clientName")
+
 
             db.collection("interests")
                 .add(interestData)

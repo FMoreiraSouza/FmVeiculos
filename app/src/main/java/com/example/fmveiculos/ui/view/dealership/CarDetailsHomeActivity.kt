@@ -8,10 +8,7 @@ import android.text.Spanned
 import android.text.style.StyleSpan
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.fmveiculos.R
 
@@ -39,7 +36,7 @@ class CarDetailsHomeActivity : AppCompatActivity() {
 
         Glide.with(this)
             .load(carImageResource)
-            .fitCenter() // Ajusta a imagem para caber centralizada no ImageView
+            .fitCenter()
             .into(carImageView)
 
         carNameTextView.text = createStyledText("", carName)
@@ -47,7 +44,7 @@ class CarDetailsHomeActivity : AppCompatActivity() {
         carDescriptionTextView.text = createStyledText("Descrição\n", carDescription)
         carQuantityTextView.text = createStyledText("Disponíveis: ", carQuantity.toString())
         carCategoryTextView.text = createStyledText("Categoria: ", carCategory)
-        carPriceTextView.text = createStyledText("Preço: R$ ", String.format("%.3f", carPrice))
+        carPriceTextView.text = createStyledText("Preço: R$ ", String.format("%.2f", carPrice))
     }
 
     private fun createStyledText(label: String, value: String?): SpannableString {

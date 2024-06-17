@@ -29,7 +29,6 @@ class LoginViewModel : ViewModel() {
                     )
                     _loginResult.value = false
                 }
-
             }
     }
 
@@ -39,6 +38,4 @@ class LoginViewModel : ViewModel() {
             return
         }
     }
-
-
 }

@@ -36,8 +36,6 @@ class LoginActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-
-
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         emailField = findViewById(R.id.emailField)
@@ -72,7 +70,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun observeViewModel() {
         val loginObserver = Observer<Boolean> { success ->
@@ -113,4 +110,6 @@ class LoginActivity : AppCompatActivity() {
             apply()
         }
     }
+
+
 }

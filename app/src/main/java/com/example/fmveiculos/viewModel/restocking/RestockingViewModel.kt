@@ -32,12 +32,9 @@ class RestockingViewModel : ViewModel() {
         if (uriSelectedImage != null) {
             fileReference.putFile(uriSelectedImage!!)
                 .addOnSuccessListener { taskSnapshot ->
-                    // Após o upload da imagem, obter a URL de download
                     fileReference.downloadUrl.addOnSuccessListener { uri ->
                         val imageUrl = uri.toString()
-                        // Atualizar o objeto Car com a URL da imagem
                         car.imageResource = imageUrl
-                        // Salvar o carro no Firestore
                         saveCarToFirestore(car, onSuccess, onFailure)
                     }
                 }
@@ -51,12 +48,9 @@ class RestockingViewModel : ViewModel() {
 
             fileReference.putBytes(data)
                 .addOnSuccessListener { taskSnapshot ->
-                    // Após o upload da imagem, obter a URL de download
                     fileReference.downloadUrl.addOnSuccessListener { uri ->
                         val imageUrl = uri.toString()
-                        // Atualizar o objeto Car com a URL da imagem
                         car.imageResource = imageUrl
-                        // Salvar o carro no Firestore
                         saveCarToFirestore(car, onSuccess, onFailure)
                     }
                 }

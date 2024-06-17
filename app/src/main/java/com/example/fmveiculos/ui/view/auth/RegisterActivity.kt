@@ -29,8 +29,8 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         setSupportActionBar(findViewById(R.id.toolbar))
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
@@ -59,6 +59,7 @@ class RegisterActivity : AppCompatActivity() {
             if (success) {
                 Toast.makeText(this, "Cadastro bem sucedido", Toast.LENGTH_LONG).show()
                 setFirstLoginFlag(true)
+                saveClientName(user.name)
                 val extras = Bundle().apply {
                     putBoolean("CAME_FROM_REGISTER", true)
                 }
@@ -74,6 +75,14 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
         viewModel.registerResult.observe(this, registerObserver)
+    }
+
+    private fun saveClientName(clientName: String) {
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putString("client_name", clientName)
+            apply()
+        }
     }
 
     private fun setFirstLoginFlag(isFirstLogin: Boolean) {

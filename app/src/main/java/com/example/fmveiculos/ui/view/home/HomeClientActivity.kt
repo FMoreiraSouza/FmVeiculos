@@ -14,7 +14,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.fmveiculos.R
 import com.example.fmveiculos.ui.view.auth.LoginActivity
-
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 

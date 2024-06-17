@@ -54,11 +54,9 @@ class ImageAdapter(private val context: Context, private val hasWhatsappLayout: 
 
         if (view == null) {
             try {
-                Log.d("ImageAdapter", "Inflating new view for position $position")
                 view = LayoutInflater.from(context).inflate(R.layout.grid_item_layout, parent, false)
                 viewHolder = ViewHolder(view)
                 view.tag = viewHolder
-                Log.d("ImageAdapter", "View inflated successfully for position $position")
             } catch (e: Exception) {
                 Log.e("ImageAdapter", "Error inflating view", e)
                 return null

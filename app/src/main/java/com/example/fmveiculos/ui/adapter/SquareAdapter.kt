@@ -12,8 +12,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.fmveiculos.R
 import com.example.fmveiculos.ui.view.catalog.CatalogActivity
+import com.example.fmveiculos.ui.view.dashboard.DashboardActivity
+import com.example.fmveiculos.ui.view.interests.InterestActivity
 import com.example.fmveiculos.ui.view.restocking.RestockingActivity
-
 
 class SquareAdapter(private val context: Context) : BaseAdapter() {
 
@@ -24,7 +25,7 @@ class SquareAdapter(private val context: Context) : BaseAdapter() {
         R.drawable.sales_report,
         R.drawable.sales_register
     )
-    private val names = listOf("Catálogo", "Reposição", "Dashboard", "Registros")
+    private val names = listOf("Catálogo", "Reposição", "Dashboard", "Interesses")
 
     override fun getCount(): Int {
         return squares.size
@@ -58,12 +59,9 @@ class SquareAdapter(private val context: Context) : BaseAdapter() {
         squareView.setBackgroundColor(squareColor)
         squareIcon.setImageResource(iconResId)
 
-        // Adicione logs para ajudar a rastrear o fluxo do código
         Log.d("SquareAdapter", "Nome do item: $name")
 
-        // Adicionando um listener de clique ao item da GridView
         view.setOnClickListener {
-            // Verifique se o nome é não nulo para evitar NPE
             if (!name.isNullOrEmpty()) {
                 when (name) {
                     "Reposição" -> {
@@ -72,6 +70,14 @@ class SquareAdapter(private val context: Context) : BaseAdapter() {
                     }
                     "Catálogo" -> {
                         val intent = Intent(context, CatalogActivity::class.java)
+                        context.startActivity(intent)
+                    }
+                    "Dashboard" -> {
+                        val intent = Intent(context, DashboardActivity::class.java)
+                        context.startActivity(intent)
+                    }
+                    "Interesses" -> {
+                        val intent = Intent(context, InterestActivity::class.java)
                         context.startActivity(intent)
                     }
                 }
