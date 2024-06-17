@@ -6,6 +6,7 @@ data class UserModel(
     var password: String = "",
     var cpf: String = "",
     var cep: String = "",
+    var address: String = "",
 )
 
 

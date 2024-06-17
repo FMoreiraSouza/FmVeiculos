@@ -48,9 +48,10 @@ class HomeAdminActivity : AppCompatActivity() {
         }
 
         val logoText = navigationView.getHeaderView(0).findViewById<TextView>(R.id.fmVehiclesTextView)
-        val text = "Administrador"
+        val text = "FMVeículos"
         val spannable = SpannableString(text)
-        spannable.setSpan(ForegroundColorSpan(Color.parseColor("#A9A9A9")), 0, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(ForegroundColorSpan(Color.parseColor("#A9A9A9")), 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE) // Cor cinza platinado
+        spannable.setSpan(ForegroundColorSpan(Color.parseColor("#FF4500")), 2, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE) // Cor vermelho metálico
         logoText.setText(spannable, TextView.BufferType.SPANNABLE)
 
         val gridView = findViewById<GridView>(R.id.gridView)

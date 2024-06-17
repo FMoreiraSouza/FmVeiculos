@@ -3,25 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.auth.LoginActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.view.auth.RegisterActivity">
 
     <!-- AppBar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp">
+        android:background="@color/colorAccent"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:navigationIcon="@drawable/ic_back_24">
 
         <TextView
             android:id="@+id/toolbar_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="Cadastro"
-            android:textColor="@color/metallic_gray"
+            android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_gravity="center" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <!-- Formulário de Cadastro -->
@@ -46,7 +50,8 @@
                     android:id="@+id/editTextNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nome" />
+                    android:hint="Nome"
+                    android:textColorHint="@color/colorPrimary"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Campo Email -->
@@ -60,6 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
+                    android:textColorHint="@color/colorPrimary"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,7 +79,8 @@
                     android:id="@+id/editTextSenha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Senha" />
+                    android:hint="Senha"
+                    android:textColorHint="@color/colorPrimary"/>/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Campo CPF -->
@@ -87,6 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="CPF"
+                    android:textColorHint="@color/colorPrimary"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,7 +109,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="CEP"
+                    android:textColorHint="@color/colorPrimary"
                     android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo Endereço -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Endereço"
+                    android:textColorHint="@color/colorPrimary"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Botão de Cadastro -->

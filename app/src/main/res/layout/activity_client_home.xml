@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorAccent"
-            android:title="Automóveis"
             android:titleTextColor="@android:color/white"
             app:navigationIcon="@drawable/bar_menu_icon">
 
@@ -25,8 +24,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Automóveis"
-                android:textColor="@android:color/black"
+                android:text="Cliente"
+                android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
         </androidx.appcompat.widget.Toolbar>

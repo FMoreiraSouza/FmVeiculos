@@ -5,6 +5,10 @@
             android:title="Configurações"
             android:icon="@android:drawable/ic_menu_preferences" />
         <item
+            android:id="@+id/interests"
+            android:title="Interesses"
+            android:icon="@drawable/ic_interests_car_24" />
+        <item
             android:id="@+id/action_logout"
             android:title="Sair"
             android:icon="@android:drawable/ic_lock_power_off" />

@@ -34,7 +34,6 @@ class CarDetailsClientActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-
         val carImageResource = intent.getStringExtra("carImage")
         val carName = intent.getStringExtra("carName")
         val carBrand = intent.getStringExtra("carBrand")
@@ -101,12 +100,14 @@ class CarDetailsClientActivity : AppCompatActivity() {
             val carName = intent.getStringExtra("carName")
             val carPrice = intent.getDoubleExtra("carPrice", 0.0)
             val timestamp = Calendar.getInstance().time.toString()
+            val status = "PENDING"
 
             val interestData = hashMapOf(
                 "clientName" to clientName,
                 "carName" to carName,
                 "carPrice" to carPrice,
-                "timestamp" to timestamp
+                "timestamp" to timestamp,
+                "status" to status
             )
 
             Log.d("clientName", "Nome do cliente obtido: $clientName")

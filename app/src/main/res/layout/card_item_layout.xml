@@ -43,5 +43,15 @@
             android:text="Data do interesse"
             android:layout_marginTop="4dp"/>
 
+        <Button
+            android:id="@+id/buttonConfirmInterest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:text="Interesse confirmado?"
+            android:layout_marginTop="8dp"/>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

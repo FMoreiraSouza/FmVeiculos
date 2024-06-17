@@ -14,7 +14,7 @@
         android:background="@color/colorAccent"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:navigationIcon="@drawable/bar_menu_icon">
+        app:navigationIcon="@drawable/ic_menu_24">
 
         <TextView
             android:id="@+id/toolbar_title"

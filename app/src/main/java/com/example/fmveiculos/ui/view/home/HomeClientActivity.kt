@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.fmveiculos.R
 import com.example.fmveiculos.ui.view.auth.LoginActivity
+import com.example.fmveiculos.ui.view.interests.InterestListActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -39,9 +40,21 @@ class HomeClientActivity : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.action_settings -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                R.id.interests -> {
+                    val intent = Intent(this, InterestListActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
                 R.id.action_logout -> {
                     auth.signOut()
-                    val intent = Intent(this@HomeClientActivity, LoginActivity::class.java)
+                    val intent = Intent(this, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
