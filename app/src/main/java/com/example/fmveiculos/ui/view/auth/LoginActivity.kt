@@ -22,9 +22,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var emailField: EditText
     private lateinit var passwordField: EditText
     private lateinit var loginButton: Button
+    private lateinit var forgotPasswordTextButton: TextView
     private lateinit var registerButton: TextView
     private lateinit var dealershipName: TextView
-    private lateinit var loginClient: TextView
     private lateinit var viewModel: LoginViewModel
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -41,9 +41,9 @@ class LoginActivity : AppCompatActivity() {
         emailField = findViewById(R.id.emailField)
         passwordField = findViewById(R.id.passwordField)
         loginButton = findViewById(R.id.loginButton)
+        forgotPasswordTextButton = findViewById(R.id.forgotPasswordTextButton)
         registerButton = findViewById(R.id.registerButton)
         dealershipName = findViewById(R.id.logoTextDealershipName)
-        loginClient = findViewById(R.id.logoTextClient)
 
         setupUI(dealershipName)
 
@@ -52,6 +52,11 @@ class LoginActivity : AppCompatActivity() {
             password = passwordField.text.toString()
             viewModel.loginUser(email, password)
         }
+
+        forgotPasswordTextButton.setOnClickListener {
+            Navigator().navigateToActivity(this, SendEmailActivity::class.java)
+        }
+
 
         registerButton.setOnClickListener {
             Navigator().navigateToActivity(this, RegisterActivity::class.java)
@@ -78,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
                 redirectToHome()
                 Toast.makeText(this, "Login bem sucedido!", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "Credenciais inválidas", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Email ou Senha inválidos!", Toast.LENGTH_LONG).show()
             }
         }
         viewModel.loginResult.observe(this, loginObserver)

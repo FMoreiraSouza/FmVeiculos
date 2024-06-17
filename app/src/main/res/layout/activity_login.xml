@@ -20,15 +20,9 @@
             android:id="@+id/logoTextDealershipName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="36sp"
+            android:textSize="48sp"
             android:textColor="@android:color/black" />
 
-        <TextView
-            android:id="@+id/logoTextClient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="36sp"
-            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,7 +83,7 @@
             android:text="Entrar" />
 
         <TextView
-            android:id="@+id/forgotPasswordButton"
+            android:id="@+id/forgotPasswordTextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

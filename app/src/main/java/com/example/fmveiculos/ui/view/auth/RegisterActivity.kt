@@ -3,10 +3,8 @@ package com.example.fmveiculos.ui.view.auth
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
@@ -15,10 +13,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.fmveiculos.R
 import com.example.fmveiculos.model.UserModel
+import com.example.fmveiculos.utils.CpfMask
 import com.example.fmveiculos.utils.Navigator
 import com.example.fmveiculos.viewModel.auth.RegisterViewModel
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -28,8 +26,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var emailField: EditText
     private lateinit var passwordField: EditText
     private lateinit var cpfField: EditText
-    private lateinit var cepField: EditText
-    private lateinit var addressField: EditText
+    private lateinit var cityField: EditText
+    private lateinit var stateField: EditText
     private lateinit var user: UserModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,8 +48,10 @@ class RegisterActivity : AppCompatActivity() {
         emailField = findViewById(R.id.editTextEmail)
         passwordField = findViewById(R.id.editTextSenha)
         cpfField = findViewById(R.id.editTextCPF)
-        cepField = findViewById(R.id.editTextCEP)
-        addressField = findViewById(R.id.editTextAddress)
+        cityField = findViewById(R.id.editTextCity)
+        stateField = findViewById(R.id.editTextState)
+
+        cpfField.addTextChangedListener(CpfMask(cpfField))
 
         finishRegisterButton.setOnClickListener {
             user = UserModel(
@@ -59,14 +59,15 @@ class RegisterActivity : AppCompatActivity() {
                 email = emailField.text.toString(),
                 password = passwordField.text.toString(),
                 cpf = cpfField.text.toString(),
-                cep = cepField.text.toString(),
-                address = addressField.text.toString(),
+                city = cityField.text.toString(),
+                state = cityField.text.toString(),
             )
             viewModel.registerUser(user.email, user.password)
         }
         observeViewModel()
 
     }
+
     private fun observeViewModel() {
         val registerObserver = Observer<Boolean> { success ->
             if (success) {
@@ -78,14 +79,17 @@ class RegisterActivity : AppCompatActivity() {
                 val customer = UserModel(
                     name = user.name,
                     cpf = user.cpf,
-                    cep = user.cep,
-                    address = user.address
+                    city = user.city,
+                    state = user.state
                 )
                 db.collection("customers")
                     .document(user.email)
                     .set(customer)
                     .addOnSuccessListener {
-                        Log.d("RegisterActivity", "Dados do cliente salvos com sucesso no Firestore")
+                        Log.d(
+                            "RegisterActivity",
+                            "Dados do cliente salvos com sucesso no Firestore"
+                        )
                     }
                     .addOnFailureListener { e ->
                         Log.e("RegisterActivity", "Erro ao salvar dados do cliente no Firestore", e)

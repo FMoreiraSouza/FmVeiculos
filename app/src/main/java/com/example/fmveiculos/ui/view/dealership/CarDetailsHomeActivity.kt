@@ -9,14 +9,25 @@ import android.text.style.StyleSpan
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.example.fmveiculos.R
+import com.example.fmveiculos.ui.view.home.HomeAdminActivity
+import com.example.fmveiculos.ui.view.home.HomeClientActivity
+import com.example.fmveiculos.utils.Navigator
 
 class CarDetailsHomeActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_details_home)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbar.setNavigationOnClickListener {
+            Navigator().navigateToActivity(this, HomeAdminActivity::class.java)
+        }
 
         val carImageResource = intent.getStringExtra("carImage")
         val carName = intent.getStringExtra("carName")

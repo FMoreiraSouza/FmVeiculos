@@ -5,8 +5,8 @@ data class UserModel(
     var email: String = "",
     var password: String = "",
     var cpf: String = "",
-    var cep: String = "",
-    var address: String = "",
+    var city: String = "",
+    var state: String = "",
 )
 
 

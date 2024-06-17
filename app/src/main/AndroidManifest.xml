@@ -16,6 +16,12 @@
         android:theme="@style/Theme.FMVeiculos"
         tools:targetApi="31">
         <activity
+            android:name=".ui.view.auth.PasswordRecoveryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.auth.SendEmailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.interests.InterestListActivity"
             android:exported="false" />
         <activity

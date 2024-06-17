@@ -17,8 +17,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.example.fmveiculos.R
+import com.example.fmveiculos.ui.view.home.HomeClientActivity
+import com.example.fmveiculos.utils.Navigator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -31,6 +34,13 @@ class CarDetailsClientActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_details_client)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbar.setNavigationOnClickListener {
+            Navigator().navigateToActivity(this, HomeClientActivity::class.java)
+        }
 
         auth = FirebaseAuth.getInstance()
 
@@ -100,7 +110,7 @@ class CarDetailsClientActivity : AppCompatActivity() {
             val carName = intent.getStringExtra("carName")
             val carPrice = intent.getDoubleExtra("carPrice", 0.0)
             val timestamp = Calendar.getInstance().time.toString()
-            val status = "PENDING"
+            val status = "Pendente"
 
             val interestData = hashMapOf(
                 "clientName" to clientName,

@@ -44,6 +44,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:hintTextColor="@color/colorPrimary"
                 android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -58,6 +59,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:hintTextColor="@color/colorPrimary"
                 android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -73,6 +75,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:hintTextColor="@color/colorPrimary"
                 android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -80,13 +83,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Senha"
-                    android:textColorHint="@color/colorPrimary"/>/>
+                    android:textColorHint="@color/colorPrimary"
+                    android:inputType="textPassword"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Campo CPF -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:hintTextColor="@color/colorPrimary"
                 android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -94,36 +99,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="CPF"
-                    android:textColorHint="@color/colorPrimary"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo CEP -->
+            <!-- Campo Cidade -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:hintTextColor="@color/colorPrimary"
                 android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextCEP"
+                    android:id="@+id/editTextCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="CEP"
-                    android:textColorHint="@color/colorPrimary"
-                    android:inputType="number" />
+                    android:hint="Cidade"
+                    android:textColorHint="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo Endereço -->
+            <!-- Campo Estado -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:hintTextColor="@color/colorPrimary"
                 android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextAddress"
+                    android:id="@+id/editTextState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Endereço"
+                    android:hint="Estado"
                     android:textColorHint="@color/colorPrimary"/>
             </com.google.android.material.textfield.TextInputLayout>
 
