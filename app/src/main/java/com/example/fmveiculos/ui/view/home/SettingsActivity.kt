@@ -41,30 +41,32 @@ class SettingsActivity : AppCompatActivity() {
 
         val currentUserEmail = firebaseAuth.currentUser?.email
         val db = FirebaseFirestore.getInstance()
-        val docRef = db.collection("customers").document(currentUserEmail!!)
+        val docRef = firebaseAuth.currentUser?.let { db.collection("userinfo").document(it.uid) }
 
-        docRef.get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val document = task.result
-                    if (document != null && document.exists()) {
-                        val name = document.getString("name")
-                        val cpf = document.getString("cpf")
-                        val city = document.getString("city")
-                        val state = document.getString("state")
+        if (docRef != null) {
+            docRef.get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val document = task.result
+                        if (document != null && document.exists()) {
+                            val name = document.getString("name")
+                            val cpf = document.getString("cpf")
+                            val city = document.getString("city")
+                            val state = document.getString("state")
 
-                        // Exibir os dados nos TextViews
-                        textViewName.text = "Nome do Usuário: $name"
-                        textViewCPF.text = "CPF: $cpf"
-                        textViewCity.text = "Cidade: $city"
-                        textViewState.text = "Estado: $state"
+                            // Exibir os dados nos TextViews
+                            textViewName.text = "Nome do Usuário: $name"
+                            textViewCPF.text = "CPF: $cpf"
+                            textViewCity.text = "Cidade: $city"
+                            textViewState.text = "Estado: $state"
+                        } else {
+                            Log.d(TAG, "No such document")
+                        }
                     } else {
-                        Log.d(TAG, "No such document")
+                        Log.d(TAG, "get failed with ", task.exception)
                     }
-                } else {
-                    Log.d(TAG, "get failed with ", task.exception)
                 }
-            }
+        }
 
 
     }

@@ -12,10 +12,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.fmveiculos.R
+import com.example.fmveiculos.model.UserInfoModel
 import com.example.fmveiculos.model.UserModel
 import com.example.fmveiculos.utils.CpfMask
 import com.example.fmveiculos.utils.Navigator
 import com.example.fmveiculos.viewModel.auth.RegisterViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterActivity : AppCompatActivity() {
@@ -29,6 +31,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var cityField: EditText
     private lateinit var stateField: EditText
     private lateinit var user: UserModel
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,12 +58,8 @@ class RegisterActivity : AppCompatActivity() {
 
         finishRegisterButton.setOnClickListener {
             user = UserModel(
-                name = nameField.text.toString(),
                 email = emailField.text.toString(),
                 password = passwordField.text.toString(),
-                cpf = cpfField.text.toString(),
-                city = cityField.text.toString(),
-                state = cityField.text.toString(),
             )
             viewModel.registerUser(user.email, user.password)
         }
@@ -76,24 +75,29 @@ class RegisterActivity : AppCompatActivity() {
 
                 val db = FirebaseFirestore.getInstance()
 
-                val customer = UserModel(
-                    name = user.name,
-                    cpf = user.cpf,
-                    city = user.city,
-                    state = user.state
-                )
-                db.collection("customers")
-                    .document(user.email)
-                    .set(customer)
-                    .addOnSuccessListener {
-                        Log.d(
-                            "RegisterActivity",
-                            "Dados do cliente salvos com sucesso no Firestore"
-                        )
-                    }
-                    .addOnFailureListener { e ->
-                        Log.e("RegisterActivity", "Erro ao salvar dados do cliente no Firestore", e)
-                    }
+                val customer = auth.currentUser?.let {
+                    UserInfoModel(
+                        id = it.uid,
+                        name = nameField.text.toString(),
+                        cpf = cpfField.text.toString(),
+                        city = cityField.text.toString(),
+                        state = stateField.text.toString(),
+                    )
+                }
+                if (customer != null) {
+                    db.collection("userInfo")
+                        .document(auth.currentUser!!.uid)
+                        .set(customer)
+                        .addOnSuccessListener {
+                            Log.d(
+                                "RegisterActivity",
+                                "Dados do cliente salvos com sucesso no Firestore"
+                            )
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("RegisterActivity", "Erro ao salvar dados do cliente no Firestore", e)
+                        }
+                }
 
                 val extras = Bundle().apply {
                     putBoolean("CAME_FROM_REGISTER", true)

@@ -9,7 +9,7 @@ import com.example.fmveiculos.R
 import com.example.fmveiculos.ui.adapter.InterestListAdapter
 import com.example.fmveiculos.utils.Navigator
 import com.google.firebase.firestore.FirebaseFirestore
-import InterestModel
+import com.example.fmveiculos.model.InterestModel
 import com.example.fmveiculos.ui.view.home.HomeClientActivity
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,6 +45,7 @@ class InterestListActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot.documents) {
+                    val userId = ""
                     val clientName = ""
                     val carName = document.getString("carName") ?: ""
                     val carPrice = document.getDouble("carPrice") ?: 0.0
@@ -54,7 +55,7 @@ class InterestListActivity : AppCompatActivity() {
                     // Formatar a data
                     val formattedTimestamp = formatFirebaseTimestamp(timestamp)
 
-                    val interest = InterestModel(clientName, carName, carPrice, formattedTimestamp, status)
+                    val interest = InterestModel(userId,clientName, carName, carPrice, formattedTimestamp, status)
                     interestsList.add(interest)
                 }
                 adapter.notifyDataSetChanged()

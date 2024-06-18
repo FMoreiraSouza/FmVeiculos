@@ -102,38 +102,50 @@ class CarDetailsClientActivity : AppCompatActivity() {
     }
 
     fun confirmInterest() {
-        val currentUser = auth.currentUser
-        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val userId = auth.currentUser?.uid
+        if (userId != null) {
+            val userDocRef = db.collection("userInfo").document(userId)
 
-        if (currentUser != null) {
-            val clientName = sharedPreferences.getString("client_name", "Nome não disponível") ?: "Nome não disponível"
-            val carName = intent.getStringExtra("carName")
-            val carPrice = intent.getDoubleExtra("carPrice", 0.0)
-            val timestamp = Calendar.getInstance().time.toString()
-            val status = "Pendente"
+            // Recuperar o documento
+            userDocRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.contains("name")) {
+                        val name = document.getString("name")
+                        Log.d("MainActivity", "Name: $name")
 
-            val interestData = hashMapOf(
-                "clientName" to clientName,
-                "carName" to carName,
-                "carPrice" to carPrice,
-                "timestamp" to timestamp,
-                "status" to status
-            )
+                        val carName = intent.getStringExtra("carName")
+                        val carPrice = intent.getDoubleExtra("carPrice", 0.0)
+                        val timestamp = Calendar.getInstance().time.toString()
+                        val status = "Pendente"
 
-            Log.d("clientName", "Nome do cliente obtido: $clientName")
+                        val interestData = hashMapOf(
+                            "userId" to userId,
+                            "name" to name,
+                            "carName" to carName,
+                            "carPrice" to carPrice,
+                            "timestamp" to timestamp,
+                            "status" to status
+                        )
 
-
-            db.collection("interests")
-                .add(interestData)
-                .addOnSuccessListener { documentReference ->
-                    Toast.makeText(this, "Interesse de pedido salvo com sucesso", Toast.LENGTH_LONG)
-                        .show()
+                        db.collection("interests")
+                            .add(interestData)
+                            .addOnSuccessListener { documentReference ->
+                                Toast.makeText(this, "Interesse de pedido salvo com sucesso", Toast.LENGTH_LONG)
+                                    .show()
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "Erro na solicitação de pedido", Toast.LENGTH_LONG).show()
+                            }
+                    } else {
+                        Log.d("MainActivity", "Campo 'name' não encontrado no documento")
+                    }
                 }
-                .addOnFailureListener { e ->
-                    Toast.makeText(this, "Erro na solicitação de pedido", Toast.LENGTH_LONG).show()
+                .addOnFailureListener { exception ->
+                    Log.d("MainActivity", "Erro ao obter documento: ", exception)
                 }
         } else {
             Toast.makeText(this, "Usuário não autenticado", Toast.LENGTH_LONG).show()
         }
     }
+
 }

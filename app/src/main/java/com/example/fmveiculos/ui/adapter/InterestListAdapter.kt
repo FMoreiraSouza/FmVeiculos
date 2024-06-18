@@ -1,6 +1,6 @@
 package com.example.fmveiculos.ui.adapter
 
-import InterestModel
+import com.example.fmveiculos.model.InterestModel
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
