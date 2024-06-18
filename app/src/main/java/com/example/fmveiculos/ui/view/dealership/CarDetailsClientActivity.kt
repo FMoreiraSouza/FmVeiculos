@@ -127,11 +127,21 @@ class CarDetailsClientActivity : AppCompatActivity() {
                             "status" to status
                         )
 
+                        // Adicionar o documento à coleção e obter a referência do documento
                         db.collection("interests")
                             .add(interestData)
                             .addOnSuccessListener { documentReference ->
-                                Toast.makeText(this, "Interesse de pedido salvo com sucesso", Toast.LENGTH_LONG)
-                                    .show()
+                                // Obter o ID do documento gerado
+                                val documentId = documentReference.id
+
+                                // Atualizar o documento recém-criado com o ID
+                                documentReference.update("id", documentId)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(this, "Interesse de pedido salvo com sucesso", Toast.LENGTH_LONG).show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(this, "Erro ao salvar o ID do documento", Toast.LENGTH_LONG).show()
+                                    }
                             }
                             .addOnFailureListener { e ->
                                 Toast.makeText(this, "Erro na solicitação de pedido", Toast.LENGTH_LONG).show()
@@ -147,5 +157,6 @@ class CarDetailsClientActivity : AppCompatActivity() {
             Toast.makeText(this, "Usuário não autenticado", Toast.LENGTH_LONG).show()
         }
     }
+
 
 }

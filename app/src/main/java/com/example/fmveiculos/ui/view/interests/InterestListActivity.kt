@@ -45,6 +45,7 @@ class InterestListActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot.documents) {
+                    val id = ""
                     val userId = ""
                     val clientName = ""
                     val carName = document.getString("carName") ?: ""
@@ -55,7 +56,7 @@ class InterestListActivity : AppCompatActivity() {
                     // Formatar a data
                     val formattedTimestamp = formatFirebaseTimestamp(timestamp)
 
-                    val interest = InterestModel(userId,clientName, carName, carPrice, formattedTimestamp, status)
+                    val interest = InterestModel(id, userId,clientName, carName, carPrice, formattedTimestamp, status)
                     interestsList.add(interest)
                 }
                 adapter.notifyDataSetChanged()

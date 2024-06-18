@@ -20,8 +20,11 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
     }
 
     private fun fetchDataFromFirestore() {
-        firestore.collection("interests").get()
+        firestore.collection("interests")
+            .whereEqualTo("status", "Pendente")
+            .get()
             .addOnSuccessListener { documents ->
+                interests.clear()
                 for (document in documents) {
                     val interest = document.toObject(InterestModel::class.java)
                     interests.add(interest)
@@ -64,7 +67,6 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
         viewHolder.carNameTextView.text = interest.carName
         viewHolder.carPriceTextView.text = "RS " + String.format("%.2f", interest.carPrice)
 
-        // Formatando a data
         val dateFormatFirebase = SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT'Z yyyy", Locale.US)
         try {
             val date = dateFormatFirebase.parse(interest.timestamp)
@@ -80,7 +82,6 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
             viewHolder.interestDateTextView.text = "Data Inválida"
         }
 
-        // Configurando o clique do botão
         viewHolder.buttonConfirmInterest.setOnClickListener {
             showConfirmationPopup(interest, view)
         }
@@ -98,56 +99,23 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
 
         popupWindow.showAtLocation(convertView, Gravity.CENTER, 0, 0)
 
-        val buttonYes = popupView.findViewById<Button>(R.id.buttonYes)
         val buttonNo = popupView.findViewById<Button>(R.id.buttonNo)
 
-        buttonYes.setOnClickListener {
-            saveDataWithSharedPreferences(interest)
-            startDashboardActivity()
-            popupWindow.dismiss()
-        }
-
         buttonNo.setOnClickListener {
-            // Atualizar o status para "Cancelado" no Firestore
-            val db = FirebaseFirestore.getInstance()
-            val docRef = db.collection("interests").document()
-
-            db.runTransaction { transaction ->
-                transaction.update(docRef, "status", "Cancelado")
-            }.addOnSuccessListener {
-                Log.d("InterestAdapter", "Status atualizado para Cancelado")
-
-            }.addOnFailureListener { e ->
-                Log.e("InterestAdapter", "Erro ao atualizar status", e)
-            }
-
-            interests.remove(interest)
-            notifyDataSetChanged()
-            popupWindow.dismiss()
+            firestore.collection("interests").document(interest.id).update("status", "Cancelado")
+                .addOnSuccessListener {
+                    Log.d("InterestAdapter", "Status updated successfully")
+                    interest.status = "Cancelado"
+                    interests.remove(interest)
+                    notifyDataSetChanged()
+                    popupWindow.dismiss()
+                }
+                .addOnFailureListener { e ->
+                    Log.e("InterestAdapter", "Error updating status", e)
+                    Toast.makeText(context, "Erro ao cancelar interesse", Toast.LENGTH_SHORT).show()
+                    popupWindow.dismiss()
+                }
         }
-    }
-
-    private fun saveDataWithSharedPreferences(interest: InterestModel) {
-        val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("name", interest.name)
-        editor.putString("carName", interest.carName)
-        editor.putFloat("carPrice", interest.carPrice.toFloat())
-        editor.putString("timestamp", interest.timestamp)
-        editor.apply()
-
-        Toast.makeText(context, "Dados salvos com sucesso!", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun startDashboardActivity() {
-        // Start DashboardActivity and pass data via Intent
-        val intent = Intent(context, DashboardActivity::class.java)
-        val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        intent.putExtra("clientName", sharedPreferences.getString("clientName", ""))
-        intent.putExtra("carName", sharedPreferences.getString("carName", ""))
-        intent.putExtra("carPrice", sharedPreferences.getFloat("carPrice", 0f))
-        intent.putExtra("timestamp", sharedPreferences.getString("timestamp", ""))
-        context.startActivity(intent)
     }
 
     private class ViewHolder(view: View) {
