@@ -5,9 +5,9 @@ import android.view.*
 import android.widget.*
 import com.example.fmveiculos.R
 import com.example.fmveiculos.model.InterestModel
-import com.example.fmveiculos.ui.view.dashboard.DashboardActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class InterestAdapter(private val context: Context) : BaseAdapter() {
@@ -99,7 +99,52 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
 
         popupWindow.showAtLocation(convertView, Gravity.CENTER, 0, 0)
 
+        val buttonYes = popupView.findViewById<Button>(R.id.buttonYes)
         val buttonNo = popupView.findViewById<Button>(R.id.buttonNo)
+
+
+//        val mockDate: Date? =
+//            SimpleDateFormat("yyyy-MM").parse("2024-05")
+
+        buttonYes.setOnClickListener {
+//            val currentDate = mockDate ?: Date()
+//            val currentMonth = SimpleDateFormat("yyyy-MM").format(currentDate)
+            val currentMonth = SimpleDateFormat("yyyy-MM").format(Date())
+
+            val confirmationDocRef = firestore.collection("confirmations").document(currentMonth)
+
+            firestore.runTransaction { transaction ->
+                val snapshot = transaction.get(confirmationDocRef)
+
+                if (snapshot.exists()) {
+                    val currentCount = snapshot.getLong("count") ?: 0
+                    transaction.update(confirmationDocRef, "count", currentCount + 1)
+                } else {
+                    val data = hashMapOf(
+                        "count" to 1,
+                        "month" to currentMonth
+                    )
+                    transaction.set(confirmationDocRef, data)
+                }
+
+                transaction.update(
+                    firestore.collection("interests").document(interest.id),
+                    "status",
+                    "Confirmado"
+                )
+            }.addOnSuccessListener {
+                Log.d("InterestAdapter", "Status updated successfully")
+                interest.status = "Confirmado"
+                interests.remove(interest)
+                notifyDataSetChanged()
+                popupWindow.dismiss()
+            }.addOnFailureListener { e ->
+                Log.e("InterestAdapter", "Error updating status", e)
+                Toast.makeText(context, "Erro ao confirmar interesse", Toast.LENGTH_SHORT).show()
+                popupWindow.dismiss()
+            }
+        }
+
 
         buttonNo.setOnClickListener {
             firestore.collection("interests").document(interest.id).update("status", "Cancelado")

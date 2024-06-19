@@ -1,4 +1,6 @@
 [versions]
+aachartcoreKotlinVersion = "7.2.1"
+aachartcoreVersion = "1.7.6"
 agp = "8.4.0"
 compiler = "4.13.0"
 firebaseBom = "33.1.0"
@@ -12,9 +14,11 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.0"
 constraintlayout = "2.1.4"
-mpandroidchart = "v3.1.0"
+
 
 [libraries]
+aachartcore-kotlin = { module = "com.github.AAChartModel:AAChartCore-Kotlin", version.ref = "aachartcoreKotlinVersion" }
+aachartmodel-aachartcore = { module = "com.github.AAChartModel:AAChartCore", version.ref = "aachartcoreVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
@@ -30,7 +34,6 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

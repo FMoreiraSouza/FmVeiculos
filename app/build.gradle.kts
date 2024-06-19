@@ -37,8 +37,9 @@ android {
 }
 
 dependencies {
+    implementation (libs.aachartcore.kotlin)
     implementation(libs.glide)
-    annotationProcessor (libs.compiler)
+    annotationProcessor(libs.compiler)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth.ktx)

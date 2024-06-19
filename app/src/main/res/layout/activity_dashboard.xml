@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".ui.view.dashboard.DashboardActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -14,20 +15,31 @@
         android:background="@color/colorAccent"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/bar_menu_icon">
 
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dashboard"
             android:layout_gravity="center_horizontal"
+            android:text="Dashboard"
             android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
     </androidx.appcompat.widget.Toolbar>
+
+    <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
+        android:id="@+id/aa_chart_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+    </com.github.aachartmodel.aainfographics.aachartcreator.AAChartView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
