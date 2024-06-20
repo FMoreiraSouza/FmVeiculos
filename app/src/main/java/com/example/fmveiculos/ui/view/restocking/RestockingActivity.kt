@@ -59,12 +59,10 @@ class RestockingActivity : AppCompatActivity() {
 
         restockingViewModel = ViewModelProvider(this).get(RestockingViewModel::class.java)
 
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
-        val navigationView = findViewById<NavigationView>(R.id.navigationView)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
 
         toolbar.setNavigationOnClickListener {
-            drawerLayout.openDrawer(navigationView)
+            Navigator().navigateToActivity(this, HomeAdminActivity::class.java)
         }
 
         val editTextNome = findViewById<EditText>(R.id.editTextNome)

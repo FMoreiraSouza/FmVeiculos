@@ -1,33 +1,48 @@
 package com.example.fmveiculos.ui.view.dealership
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
+import android.icu.util.Calendar
+import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.StyleSpan
+import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.example.fmveiculos.R
+import com.example.fmveiculos.ui.view.catalog.CatalogActivity
 import com.example.fmveiculos.ui.view.home.HomeAdminActivity
 import com.example.fmveiculos.ui.view.home.HomeClientActivity
 import com.example.fmveiculos.utils.Navigator
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class CarDetailsHomeActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_details_home)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         toolbar.setNavigationOnClickListener {
-            Navigator().navigateToActivity(this, HomeAdminActivity::class.java)
+            Navigator().navigateToActivity(this, CatalogActivity::class.java)
         }
+
+        auth = FirebaseAuth.getInstance()
 
         val carImageResource = intent.getStringExtra("carImage")
         val carName = intent.getStringExtra("carName")
@@ -56,6 +71,7 @@ class CarDetailsHomeActivity : AppCompatActivity() {
         carQuantityTextView.text = createStyledText("Disponíveis: ", carQuantity.toString())
         carCategoryTextView.text = createStyledText("Categoria: ", carCategory)
         carPriceTextView.text = createStyledText("Preço: R$ ", String.format("%.2f", carPrice))
+
     }
 
     private fun createStyledText(label: String, value: String?): SpannableString {

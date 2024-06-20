@@ -71,7 +71,7 @@ class HomeClientActivity : AppCompatActivity() {
         spannable.setSpan(ForegroundColorSpan(Color.parseColor("#FF4500")), 2, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE) // Cor vermelho metálico
         logoText.setText(spannable, TextView.BufferType.SPANNABLE)
 
-        val gridView: GridView = findViewById(R.id.vehiclesGridView)
+        val gridView: GridView = findViewById(R.id.vehiclesClientGridView)
         val adapter = ImageAdapter(this, true)
         gridView.adapter = adapter
     }

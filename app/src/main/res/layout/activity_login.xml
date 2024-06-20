@@ -1,5 +1,4 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
-        android:background="@android:color/black"
         android:layout_marginTop="0dp"
+        android:background="@android:color/black"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -20,8 +19,8 @@
             android:id="@+id/logoTextDealershipName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="48sp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="48sp" />
 
     </LinearLayout>
 
@@ -47,11 +46,11 @@
             android:id="@+id/emailField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
             android:hint="Digite seu email"
+            android:inputType="textEmailAddress"
             android:textColor="@android:color/black"
             android:textColorHint="#808080"
-            android:inputType="textEmailAddress" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/passwordLabel"
@@ -66,32 +65,32 @@
             android:id="@+id/passwordField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
             android:hint="Digite sua senha"
+            android:inputType="textPassword"
             android:textColor="@android:color/black"
             android:textColorHint="#808080"
-            android:inputType="textPassword" />
+            android:textSize="15dp" />
 
         <Button
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/colorPrimary"
-            android:textColor="#FFFFFF"
-            android:layout_gravity="center_horizontal"
-            android:text="Entrar" />
+            android:text="Entrar"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/forgotPasswordTextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
             android:text="Esqueceu a senha?"
             android:textColor="#808080"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
@@ -103,8 +102,8 @@
             android:id="@+id/notOurCustomerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
             android:text="Ainda não é nosso cliente?"
             android:textColor="#808080"
             android:textSize="16sp" />
@@ -113,11 +112,11 @@
             android:id="@+id/registerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
             android:text="Cadastre-se"
             android:textColor="#808080"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="16sp" />
     </LinearLayout>
 </RelativeLayout>

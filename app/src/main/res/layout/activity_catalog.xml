@@ -17,22 +17,22 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorAccent"
-            android:title="Automóveis"
+            android:title="Catálogo"
             android:titleTextColor="@android:color/white"
-            app:navigationIcon="@drawable/bar_menu_icon">
+            app:navigationIcon="@drawable/ic_back_24">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Automóveis"
-                android:textColor="@android:color/black"
+                android:text="Veículos"
+                android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
         </androidx.appcompat.widget.Toolbar>
 
         <GridView
-            android:id="@+id/vehiclesHomeGridView"
+            android:id="@+id/vehiclesAdminGridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/toolbar"

@@ -103,14 +103,8 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
         val buttonNo = popupView.findViewById<Button>(R.id.buttonNo)
 
 
-//        val mockDate: Date? =
-//            SimpleDateFormat("yyyy-MM").parse("2024-05")
-
         buttonYes.setOnClickListener {
-//            val currentDate = mockDate ?: Date()
-//            val currentMonth = SimpleDateFormat("yyyy-MM").format(currentDate)
             val currentMonth = SimpleDateFormat("yyyy-MM").format(Date())
-
             val confirmationDocRef = firestore.collection("confirmations").document(currentMonth)
 
             firestore.runTransaction { transaction ->
@@ -127,11 +121,15 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
                     transaction.set(confirmationDocRef, data)
                 }
 
+                // Update the interests collection document status to "Confirmado"
                 transaction.update(
                     firestore.collection("interests").document(interest.id),
                     "status",
                     "Confirmado"
                 )
+
+                // Add carName to the confirmation document
+                transaction.update(confirmationDocRef, "carName", interest.carName)
             }.addOnSuccessListener {
                 Log.d("InterestAdapter", "Status updated successfully")
                 interest.status = "Confirmado"
@@ -144,6 +142,7 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
                 popupWindow.dismiss()
             }
         }
+
 
 
         buttonNo.setOnClickListener {

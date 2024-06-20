@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context=".ui.view.restocking.RestockingActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -14,7 +15,7 @@
         android:background="@color/colorAccent"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:navigationIcon="@drawable/ic_menu_24">
+        app:navigationIcon="@drawable/ic_back_24">
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -23,7 +24,6 @@
             android:text="Reposição"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:textStyle="bold"
             android:layout_gravity="center" />
 
     </androidx.appcompat.widget.Toolbar>
@@ -45,7 +45,8 @@
                 android:id="@+id/editTextNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nome do Produto"
+                android:hint="Modelo"
+                android:textColorHint="#808080"
                 android:inputType="text" />
 
             <EditText
@@ -53,6 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Descrição"
+                android:textColorHint="#808080"
                 android:inputType="textMultiLine" />
 
             <EditText
@@ -60,6 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Preço"
+                android:textColorHint="#808080"
                 android:inputType="numberDecimal" />
 
             <EditText
@@ -67,6 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Marca"
+                android:textColorHint="#808080"
                 android:inputType="text" />
 
             <EditText
@@ -74,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Categoria"
+                android:textColorHint="#808080"
                 android:inputType="text" />
 
             <EditText
@@ -81,6 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ano de Lançamento"
+                android:textColorHint="#808080"
                 android:inputType="number" />
 
             <EditText
@@ -88,6 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Quantidade"
+                android:textColorHint="#808080"
                 android:inputType="number" />
 
             <ImageView
@@ -108,37 +115,33 @@
                     android:id="@+id/btnCamera"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/btnGaleria"
-                    app:layout_constraintTop_toBottomOf="@+id/imageSelecionada"
-                    app:srcCompat="@drawable/ic_camera_24" />
+                    android:layout_marginEnd="8dp"
+                    app:srcCompat="@drawable/ic_camera_24"
+                    android:background="@android:color/transparent" />
 
                 <ImageButton
                     android:id="@+id/btnGaleria"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toStartOf="@+id/btnCamera"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageSelecionada"
-                    app:srcCompat="@drawable/ic_gallery_24" />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="24dp"
+                    app:srcCompat="@drawable/ic_gallery_24"
+                    android:background="@android:color/transparent" />
 
                 <Button
                     android:id="@+id/btnFinalizarReposicao"
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_gravity="center"
                     android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/colorPrimary"
                     android:text="Finalizar Reposição"
-                    android:textColor="#FFFFFF"/>
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

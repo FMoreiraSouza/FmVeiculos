@@ -1,15 +1,20 @@
 package com.example.fmveiculos.ui.adapter
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import com.example.fmveiculos.R
 import com.example.fmveiculos.ui.view.catalog.CatalogActivity
 import com.example.fmveiculos.ui.view.dashboard.DashboardActivity
@@ -25,7 +30,7 @@ class SquareAdapter(private val context: Context) : BaseAdapter() {
         R.drawable.sales_report,
         R.drawable.sales_register
     )
-    private val names = listOf("Catálogo", "Reposição", "Dashboard", "Interesses")
+    private val names = listOf("Veículos", "Reposição", "Dashboard", "Interesses")
 
     override fun getCount(): Int {
         return squares.size
@@ -59,34 +64,40 @@ class SquareAdapter(private val context: Context) : BaseAdapter() {
         squareView.setBackgroundColor(squareColor)
         squareIcon.setImageResource(iconResId)
 
-        Log.d("SquareAdapter", "Nome do item: $name")
-
+        // Configuração da animação de clique
+        val clickAnimation = AnimationUtils.loadAnimation(context, R.anim.button_highlight)
         view.setOnClickListener {
-            if (!name.isNullOrEmpty()) {
-                when (name) {
-                    "Reposição" -> {
-                        val intent = Intent(context, RestockingActivity::class.java)
-                        context.startActivity(intent)
-                    }
-                    "Catálogo" -> {
-                        val intent = Intent(context, CatalogActivity::class.java)
-                        context.startActivity(intent)
-                    }
-                    "Dashboard" -> {
-                        val intent = Intent(context, DashboardActivity::class.java)
-                        context.startActivity(intent)
-                    }
-                    "Interesses" -> {
-                        val intent = Intent(context, InterestActivity::class.java)
-                        context.startActivity(intent)
-                    }
+            it.startAnimation(clickAnimation) // Inicia a animação quando o item é clicado
+
+            // Lógica de navegação conforme o nome do item clicado
+            when (name) {
+                "Veículos" -> {
+                    val intent = Intent(context, CatalogActivity::class.java)
+
+                    // Configurar a transição de cena personalizada
+                    val options = ActivityOptions.makeSceneTransitionAnimation(context as Activity)
+
+                    // Iniciar a nova atividade com a transição de cena personalizada
+                    ActivityCompat.startActivity(context, intent, options.toBundle())
                 }
-            } else {
-                Log.e("SquareAdapter", "Nome do item é nulo ou vazio")
+                "Reposição" -> {
+                    val intent = Intent(context, RestockingActivity::class.java)
+                    val options = ActivityOptions.makeSceneTransitionAnimation(context as Activity)
+                    ActivityCompat.startActivity(context, intent, options.toBundle())
+                }
+                "Dashboard" -> {
+                    val intent = Intent(context, DashboardActivity::class.java)
+                    val options = ActivityOptions.makeSceneTransitionAnimation(context as Activity)
+                    ActivityCompat.startActivity(context, intent, options.toBundle())
+                }
+                "Interesses" -> {
+                    val intent = Intent(context, InterestActivity::class.java)
+                    val options = ActivityOptions.makeSceneTransitionAnimation(context as Activity)
+                    ActivityCompat.startActivity(context, intent, options.toBundle())
+                }
             }
         }
 
         return view
     }
-
 }

@@ -1,74 +1,128 @@
 package com.example.fmveiculos.ui.view.dashboard
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.fmveiculos.R
+import com.example.fmveiculos.ui.view.home.HomeAdminActivity
+import com.example.fmveiculos.utils.Navigator
+import com.github.aachartmodel.aainfographics.aachartcreator.*
+import com.github.aachartmodel.aainfographics.aaoptionsmodel.AALabels
+import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAStyle
+import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAXAxis
+import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAYAxis
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var firestore: FirebaseFirestore
-    private var contadorConfirmados: Int = 0 // Variável para armazenar o contador
+    private val months = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_dashboard)
 
-        // Inicializa o Firebase Firestore
         firestore = FirebaseFirestore.getInstance()
 
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
-        val navigationView = findViewById<NavigationView>(R.id.navigationView)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
 
         toolbar.setNavigationOnClickListener {
-            drawerLayout.openDrawer(navigationView)
+            Navigator().navigateToActivity(this, HomeAdminActivity::class.java)
         }
 
-        // Chama o método para contar os dados com status confirmado
-        contarDadosConfirmados()
-
+        val selectMonthButton = findViewById<Button>(R.id.select_month_button)
+        selectMonthButton.setOnClickListener {
+            showMonthSelectionDialog()
+        }
     }
 
-    private fun contarDadosConfirmados() {
-        // Referência para a coleção 'interesses' no Firestore
-        val interessesRef = firestore.collection("interesses")
+    override fun onStart() {
+        super.onStart()
+        loadDataAndDrawChart(null)
+    }
 
-        // Query para pegar apenas os documentos com status 'confirmado'
-        interessesRef.whereEqualTo("status", "Confirmado")
+    private fun loadDataAndDrawChart(selectedMonth: String?) {
+        firestore.collection("confirmations")
             .get()
-            .addOnSuccessListener { querySnapshot ->
-                // Inicializa o contador
-                var contador = 0
+            .addOnSuccessListener { result ->
+                val counts = mutableListOf<Int>()
 
-                // Itera sobre os documentos encontrados
-                for (document in querySnapshot.documents) {
-                    // Verifica se o status é 'Confirmado'
-                    val status = document.getString("status")
-                    if (status == "Confirmado") {
-                        // Incrementa o contador para cada documento com status 'Confirmado'
-                        contador++
+                months.clear()
+                for (document in result) {
+                    val month = document.getString("month") ?: ""
+                    val count = document.getLong("count")?.toInt() ?: 0
+                    if (month.isNotEmpty()) {
+                        months.add(month)
+                    }
+                    if (selectedMonth == null || month == selectedMonth) {
+                        counts.add(count)
                     }
                 }
 
-                // Atribui o valor do contador à variável de classe ou global
-                contadorConfirmados = contador
+                val sortedData = if (selectedMonth == null) {
+                    months.zip(counts).sortedBy { it.first }
+                } else {
+                    listOf(selectedMonth to counts.sum())
+                }
 
-                // Exibe ou utiliza o contador conforme necessário
-                println("Número de interesses confirmados: $contadorConfirmados")
+                val sortedMonths = sortedData.map { it.first }
+                val sortedCounts = sortedData.map { it.second }
 
-                // Aqui você pode chamar métodos ou fazer outras operações baseadas no contador
-                // por exemplo, atualizar a interface do usuário com o contador.
+                // Criação do modelo do gráfico
+                val aaChartModel: AAChartModel = AAChartModel()
+                    .chartType(AAChartType.Area)
+                    .title("Interesses Confirmados")
+                    .subtitle("Exibição dos dados de interesses confirmados")
+                    .backgroundColor("#FFFFFF") // colorPrimary
+                    .dataLabelsEnabled(true)
+                    .categories(sortedMonths.toTypedArray())
+                    .series(
+                        arrayOf(
+                            AASeriesElement()
+                                .name("Interesses Confirmados")
+                                .data(sortedCounts.toTypedArray())
+                                .color("#FF4500") // metallic_red
+                        )
+                    )
+
+                // Configurações detalhadas do gráfico
+                val aaChartView = findViewById<AAChartView>(R.id.aa_chart_view)
+                aaChartView.aa_drawChartWithChartModel(aaChartModel)
+
+                // Configuração do eixo X
+                val aaXAxis = AAXAxis()
+                    .gridLineColor("#A9A9A9") // metallic_gray
+                    .labels(AALabels().style(AAStyle().color("#000000"))) // colorContrast
+
+                // Configuração do eixo Y
+                val aaYAxis = AAYAxis()
+                    .gridLineColor("#A9A9A9") // metallic_gray
+                    .labels(AALabels().style(AAStyle().color("#000000"))) // colorContrast
+
+                // Configura o gráfico com os eixos configurados
+                val aaOptions = aaChartModel.aa_toAAOptions()
+                aaOptions.xAxis = aaXAxis
+                aaOptions.yAxis = aaYAxis
+                aaChartView.aa_refreshChartWithChartOptions(aaOptions)
             }
             .addOnFailureListener { exception ->
-                // Tratar falhas, se houver
-                println("Erro ao contar interesses confirmados: $exception")
+                // Trate a falha na obtenção dos dados aqui
             }
     }
 
+    private fun showMonthSelectionDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Selecione o Mês")
+
+        builder.setItems(months.toTypedArray()) { dialog, which ->
+            loadDataAndDrawChart(months[which])
+        }
+
+        builder.show()
+    }
 }
