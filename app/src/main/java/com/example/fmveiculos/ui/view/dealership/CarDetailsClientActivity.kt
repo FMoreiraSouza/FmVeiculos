@@ -36,8 +36,7 @@ class CarDetailsClientActivity : AppCompatActivity() {
         setContentView(R.layout.activity_car_details_client)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         toolbar.setNavigationOnClickListener {
             Navigator().navigateToActivity(this, HomeClientActivity::class.java)
         }

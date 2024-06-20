@@ -5,8 +5,6 @@ import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import com.example.fmveiculos.R
-import com.example.fmveiculos.ui.view.catalog.CatalogActivity
+import com.example.fmveiculos.ui.view.vehicles.VehiclesActivity
 import com.example.fmveiculos.ui.view.dashboard.DashboardActivity
 import com.example.fmveiculos.ui.view.interests.InterestActivity
 import com.example.fmveiculos.ui.view.restocking.RestockingActivity
@@ -72,7 +70,7 @@ class SquareAdapter(private val context: Context) : BaseAdapter() {
             // Lógica de navegação conforme o nome do item clicado
             when (name) {
                 "Veículos" -> {
-                    val intent = Intent(context, CatalogActivity::class.java)
+                    val intent = Intent(context, VehiclesActivity::class.java)
 
                     // Configurar a transição de cena personalizada
                     val options = ActivityOptions.makeSceneTransitionAnimation(context as Activity)

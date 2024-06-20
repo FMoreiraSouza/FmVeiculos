@@ -14,7 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.fmveiculos.R
 import com.example.fmveiculos.ui.view.auth.LoginActivity
-import com.example.fmveiculos.ui.view.interests.InterestListActivity
+import com.example.fmveiculos.ui.view.interests.HistoricActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -47,7 +47,7 @@ class HomeClientActivity : AppCompatActivity() {
                     true
                 }
                 R.id.interests -> {
-                    val intent = Intent(this, InterestListActivity::class.java)
+                    val intent = Intent(this, HistoricActivity::class.java)
                     startActivity(intent)
                     finish()
                     true

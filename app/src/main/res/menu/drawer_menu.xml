@@ -3,14 +3,14 @@
         <item
             android:id="@+id/action_settings"
             android:title="Configurações"
-            android:icon="@android:drawable/ic_menu_preferences" />
+            android:icon="@drawable/ic_settings_24" />
         <item
             android:id="@+id/interests"
-            android:title="Interesses"
-            android:icon="@drawable/ic_interests_car_24" />
+            android:title="Histórico"
+            android:icon="@drawable/ic_historic_24" />
         <item
             android:id="@+id/action_logout"
             android:title="Sair"
-            android:icon="@android:drawable/ic_lock_power_off" />
+            android:icon="@drawable/ic_logout_24" />
     </group>
 </menu>

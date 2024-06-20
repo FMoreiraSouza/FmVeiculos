@@ -1,4 +1,4 @@
-package com.example.fmveiculos.ui.view.catalog
+package com.example.fmveiculos.ui.view.vehicles
 
 import android.os.Bundle
 import android.widget.GridView
@@ -9,7 +9,7 @@ import com.example.fmveiculos.ui.adapter.ImageAdapter
 import com.example.fmveiculos.ui.view.home.HomeAdminActivity
 import com.example.fmveiculos.utils.Navigator
 
-class CatalogActivity : AppCompatActivity() {
+class VehiclesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -25,7 +25,6 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_settings)
         setupViews()
 
@@ -39,9 +38,8 @@ class SettingsActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
-        val currentUserEmail = firebaseAuth.currentUser?.email
         val db = FirebaseFirestore.getInstance()
-        val docRef = firebaseAuth.currentUser?.let { db.collection("userinfo").document(it.uid) }
+        val docRef = firebaseAuth.currentUser?.let { db.collection("userInfo").document(it.uid) }
 
         if (docRef != null) {
             docRef.get()
@@ -55,7 +53,7 @@ class SettingsActivity : AppCompatActivity() {
                             val state = document.getString("state")
 
                             // Exibir os dados nos TextViews
-                            textViewName.text = "Nome do Usuário: $name"
+                            textViewName.text = "Usuário: $name"
                             textViewCPF.text = "CPF: $cpf"
                             textViewCity.text = "Cidade: $city"
                             textViewState.text = "Estado: $state"

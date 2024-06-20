@@ -14,7 +14,7 @@ import com.example.fmveiculos.ui.view.home.HomeClientActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-class InterestListActivity : AppCompatActivity() {
+class HistoricActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: InterestListAdapter
@@ -22,11 +22,10 @@ class InterestListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_interest_list)
+        setContentView(R.layout.activity_historic)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         toolbar.setNavigationOnClickListener {
             Navigator().navigateToActivity(this, HomeClientActivity::class.java)
         }

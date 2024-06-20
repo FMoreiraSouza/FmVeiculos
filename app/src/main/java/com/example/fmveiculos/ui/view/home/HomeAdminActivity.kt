@@ -1,5 +1,6 @@
 package com.example.fmveiculos.ui.view.home
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
@@ -14,6 +15,7 @@ import com.example.fmveiculos.R
 import com.example.fmveiculos.utils.Navigator
 import com.example.fmveiculos.ui.view.auth.LoginActivity
 import com.example.fmveiculos.ui.adapter.SquareAdapter
+import com.example.fmveiculos.ui.view.interests.HistoricActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -37,6 +39,18 @@ class HomeAdminActivity : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.action_settings -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                R.id.interests -> {
+                    val intent = Intent(this, HistoricActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
                 R.id.action_logout -> {
                     auth.signOut()
                     Navigator().navigateToActivity(this, LoginActivity::class.java)
