@@ -1,5 +1,10 @@
 [versions]
+aachartcoreKotlinVersion = "7.2.1"
+aachartcoreVersion = "1.7.6"
 agp = "8.4.0"
+compiler = "4.13.0"
+firebaseBom = "33.1.0"
+glide = "4.13.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -9,9 +14,20 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.0"
 constraintlayout = "2.1.4"
+animationCoreAndroidVersion = "1.6.8"
+
 
 [libraries]
+aachartcore-kotlin = { module = "com.github.AAChartModel:AAChartCore-Kotlin", version.ref = "aachartcoreKotlinVersion" }
+aachartmodel-aachartcore = { module = "com.github.AAChartModel:AAChartCore", version.ref = "aachartcoreVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-storage-ktx = { module = "com.google.firebase:firebase-storage-ktx" }
+firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -19,6 +35,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-animation-core-android = { group = "androidx.compose.animation", name = "animation-core-android", version.ref = "animationCoreAndroidVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

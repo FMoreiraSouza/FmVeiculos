@@ -1,0 +1,142 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    tools:context=".ui.view.auth.LoginActivity">
+
+    <LinearLayout
+        android:id="@+id/logoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:background="@android:color/black"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/logoTextDealershipName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="48sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/formContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoContainer"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp">
+
+        <TextView
+            android:id="@+id/emailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/emailField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite seu email"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/black"
+            android:textColorHint="#808080"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/emailErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:layout_marginTop="4dp"
+            android:text="Email vazio" />
+
+        <TextView
+            android:id="@+id/passwordLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Senha"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/passwordField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite sua senha"
+            android:inputType="textPassword"
+            android:textColor="@android:color/black"
+            android:textColorHint="#808080"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/passwordErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:layout_marginTop="4dp"
+            android:text="Senha vazia" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Entrar"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/forgotPasswordTextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="Esqueceu a senha?"
+            android:textColor="#808080"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#808080" />
+
+        <TextView
+            android:id="@+id/notOurCustomerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="Ainda não é nosso cliente?"
+            android:textColor="#808080"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/registerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="Cadastre-se"
+            android:textColor="#808080"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- Permissões necessárias -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +16,22 @@
         android:theme="@style/Theme.FMVeiculos"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.view.interests.HistoricAdminActivity"
+            android:exported="false" />
+        <activity android:name=".ui.view.auth.SendEmailActivity" />
+        <activity android:name=".ui.view.interests.HistoricClientActivity" />
+        <activity android:name=".ui.view.home.SettingsActivity" />
+        <activity android:name=".ui.view.details.CarDetailsHomeActivity" />
+        <activity android:name=".ui.view.auth.RegisterActivity" />
+        <activity android:name=".ui.view.interests.InterestActivity" />
+        <activity android:name=".ui.view.dashboard.DashboardActivity" />
+        <activity android:name=".ui.view.vehicles.VehiclesActivity" />
+        <activity android:name=".ui.view.restocking.RestockingActivity" />
+        <activity android:name=".ui.view.details.CarDetailsClientActivity" />
+        <activity android:name=".ui.view.home.HomeClientActivity" />
+        <activity android:name=".ui.view.home.HomeAdminActivity" />
+        <activity
+            android:name=".ui.view.auth.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

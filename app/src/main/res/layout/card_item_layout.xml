@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textViewClientName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do cliente interessado"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/textViewCarName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do carro"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/textViewCarPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preço do carro"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/textViewInterestDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data do interesse"
+            android:layout_marginTop="4dp"/>
+
+        <Button
+            android:id="@+id/buttonConfirmInterest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:text="Interesse confirmado?"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
