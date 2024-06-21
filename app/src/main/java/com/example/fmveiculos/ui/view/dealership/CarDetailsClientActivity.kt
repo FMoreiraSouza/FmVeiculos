@@ -11,6 +11,8 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.StyleSpan
 import android.util.Log
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -73,14 +75,29 @@ class CarDetailsClientActivity : AppCompatActivity() {
         carCategoryTextView.text = createStyledText("Categoria: ", carCategory)
         carPriceTextView.text = createStyledText("Preço: R$ ", String.format("%.2f", carPrice))
 
+        val clickAnimation =
+            AnimationUtils.loadAnimation(applicationContext, R.anim.button_highlight)
+
+        clickAnimation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {}
+            override fun onAnimationEnd(animation: Animation?) {
+                whatsappLayout.clearAnimation()
+                interestButton.clearAnimation()
+            }
+            override fun onAnimationRepeat(animation: Animation?) {}
+        })
+
         whatsappLayout.setOnClickListener {
+            it.startAnimation(clickAnimation)
             openWhatsApp()
         }
 
         interestButton.setOnClickListener {
+            it.startAnimation(clickAnimation)
             confirmInterest()
         }
     }
+
 
     private fun createStyledText(label: String, value: String?): SpannableString {
         val spannableString = SpannableString("$label$value")
@@ -136,14 +153,26 @@ class CarDetailsClientActivity : AppCompatActivity() {
                                 // Atualizar o documento recém-criado com o ID
                                 documentReference.update("id", documentId)
                                     .addOnSuccessListener {
-                                        Toast.makeText(this, "Interesse de pedido salvo com sucesso", Toast.LENGTH_LONG).show()
+                                        Toast.makeText(
+                                            this,
+                                            "Interesse de pedido salvo com sucesso",
+                                            Toast.LENGTH_LONG
+                                        ).show()
                                     }
                                     .addOnFailureListener { e ->
-                                        Toast.makeText(this, "Erro ao salvar o ID do documento", Toast.LENGTH_LONG).show()
+                                        Toast.makeText(
+                                            this,
+                                            "Erro ao salvar o ID do documento",
+                                            Toast.LENGTH_LONG
+                                        ).show()
                                     }
                             }
                             .addOnFailureListener { e ->
-                                Toast.makeText(this, "Erro na solicitação de pedido", Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    this,
+                                    "Erro na solicitação de pedido",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                     } else {
                         Log.d("MainActivity", "Campo 'name' não encontrado no documento")

@@ -71,11 +71,7 @@ class SquareAdapter(private val context: Context) : BaseAdapter() {
             when (name) {
                 "Veículos" -> {
                     val intent = Intent(context, VehiclesActivity::class.java)
-
-                    // Configurar a transição de cena personalizada
                     val options = ActivityOptions.makeSceneTransitionAnimation(context as Activity)
-
-                    // Iniciar a nova atividade com a transição de cena personalizada
                     ActivityCompat.startActivity(context, intent, options.toBundle())
                 }
                 "Reposição" -> {

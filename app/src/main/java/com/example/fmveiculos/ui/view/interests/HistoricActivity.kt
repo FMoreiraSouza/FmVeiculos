@@ -1,6 +1,8 @@
 package com.example.fmveiculos.ui.view.interests
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +12,7 @@ import com.example.fmveiculos.ui.adapter.InterestListAdapter
 import com.example.fmveiculos.utils.Navigator
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.fmveiculos.model.InterestModel
+import com.example.fmveiculos.ui.view.home.HomeAdminActivity
 import com.example.fmveiculos.ui.view.home.HomeClientActivity
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,6 +21,7 @@ class HistoricActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: InterestListAdapter
+    private var originActivity: String? = null
     private val interestsList = mutableListOf<InterestModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +31,7 @@ class HistoricActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
 
         toolbar.setNavigationOnClickListener {
-            Navigator().navigateToActivity(this, HomeClientActivity::class.java)
+            handleNavigationClick()
         }
 
         recyclerView = findViewById(R.id.recyclerViewInterests)
@@ -77,6 +81,21 @@ class HistoricActivity : AppCompatActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
             "Data Inválida"
+        }
+    }
+
+    private fun handleNavigationClick() {
+        when (originActivity) {
+            HomeClientActivity::class.java.name -> {
+                finish()
+            }
+            HomeAdminActivity::class.java.name -> {
+                finish()
+            }
+            else -> {
+                Log.e(ContentValues.TAG, "Tela de origem desconhecida: $originActivity")
+                finish()
+            }
         }
     }
 }

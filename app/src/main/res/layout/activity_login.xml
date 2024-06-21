@@ -53,6 +53,16 @@
             android:textSize="15dp" />
 
         <TextView
+            android:id="@+id/emailErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:layout_marginTop="4dp"
+            android:text="Email vazio" />
+
+        <TextView
             android:id="@+id/passwordLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,6 +80,16 @@
             android:textColor="@android:color/black"
             android:textColorHint="#808080"
             android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/passwordErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:layout_marginTop="4dp"
+            android:text="Senha vazia" />
 
         <Button
             android:id="@+id/loginButton"

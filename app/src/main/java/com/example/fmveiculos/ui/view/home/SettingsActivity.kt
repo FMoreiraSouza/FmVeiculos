@@ -4,13 +4,9 @@ import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.fmveiculos.R
-import com.example.fmveiculos.utils.Navigator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -22,17 +18,20 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var textViewState: TextView
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+    private var originActivity: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         setupViews()
 
+        originActivity = intent.getStringExtra("originActivity")
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         toolbar.setNavigationOnClickListener {
-            Navigator().navigateToActivity(this, HomeClientActivity::class.java)
+            handleNavigationClick()
         }
 
         firebaseAuth = FirebaseAuth.getInstance()
@@ -65,8 +64,6 @@ class SettingsActivity : AppCompatActivity() {
                     }
                 }
         }
-
-
     }
 
     private fun setupViews() {
@@ -74,5 +71,20 @@ class SettingsActivity : AppCompatActivity() {
         textViewCPF = findViewById(R.id.textViewCPF)
         textViewCity = findViewById(R.id.textViewCity)
         textViewState = findViewById(R.id.textViewState)
+    }
+
+    private fun handleNavigationClick() {
+        when (originActivity) {
+            HomeClientActivity::class.java.name -> {
+                finish()
+            }
+            HomeAdminActivity::class.java.name -> {
+                finish()
+            }
+            else -> {
+                Log.e(TAG, "Tela de origem desconhecida: $originActivity")
+                finish()
+            }
+        }
     }
 }

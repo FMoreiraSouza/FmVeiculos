@@ -12,16 +12,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.fmveiculos.R
-import com.example.fmveiculos.utils.Navigator
-import com.example.fmveiculos.ui.view.auth.LoginActivity
 import com.example.fmveiculos.ui.adapter.SquareAdapter
+import com.example.fmveiculos.ui.view.auth.LoginActivity
 import com.example.fmveiculos.ui.view.interests.HistoricActivity
+import com.example.fmveiculos.utils.Navigator
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeAdminActivity : AppCompatActivity() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private var shouldClearMenuFocus = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +42,16 @@ class HomeAdminActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.action_settings -> {
                     val intent = Intent(this, SettingsActivity::class.java)
+                    intent.putExtra("originActivity", this::class.java.name)
                     startActivity(intent)
-                    finish()
+                    shouldClearMenuFocus = true
                     true
                 }
                 R.id.interests -> {
                     val intent = Intent(this, HistoricActivity::class.java)
+                    intent.putExtra("originActivity", this::class.java.name)
                     startActivity(intent)
-                    finish()
+                    shouldClearMenuFocus = true
                     true
                 }
                 R.id.action_logout -> {
@@ -70,5 +73,22 @@ class HomeAdminActivity : AppCompatActivity() {
 
         val gridView = findViewById<GridView>(R.id.gridView)
         gridView.adapter = SquareAdapter(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (shouldClearMenuFocus) {
+            clearMenuItemFocus()
+            shouldClearMenuFocus = false
+        }
+    }
+
+    private fun clearMenuItemFocus() {
+        val navigationView = findViewById<NavigationView>(R.id.navigationView)
+        val menu = navigationView.menu
+
+        for (i in 0 until menu.size()) {
+            menu.getItem(i).isCheckable = false
+        }
     }
 }

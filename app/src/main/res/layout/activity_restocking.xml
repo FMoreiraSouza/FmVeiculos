@@ -47,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Modelo"
                 android:textColorHint="#808080"
+                android:textColor="@android:color/black"
                 android:inputType="text" />
 
             <EditText
@@ -55,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Descrição"
                 android:textColorHint="#808080"
+                android:textColor="@android:color/black"
                 android:inputType="textMultiLine" />
 
             <EditText
@@ -63,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Preço"
                 android:textColorHint="#808080"
+                android:textColor="@android:color/black"
                 android:inputType="numberDecimal" />
 
             <EditText
@@ -71,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Marca"
                 android:textColorHint="#808080"
+                android:textColor="@android:color/black"
                 android:inputType="text" />
 
             <EditText
@@ -79,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Categoria"
                 android:textColorHint="#808080"
+                android:textColor="@android:color/black"
                 android:inputType="text" />
 
             <EditText
@@ -87,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Ano de Lançamento"
                 android:textColorHint="#808080"
+                android:textColor="@android:color/black"
                 android:inputType="number" />
 
             <EditText
@@ -95,6 +101,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Quantidade"
                 android:textColorHint="#808080"
+                android:textColor="@android:color/black"
                 android:inputType="number" />
 
             <ImageView

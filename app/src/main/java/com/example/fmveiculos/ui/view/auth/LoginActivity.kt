@@ -2,6 +2,10 @@ package com.example.fmveiculos.ui.view.auth
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -31,11 +35,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        var email: String
-        var password: String
 
         firebaseAuth = FirebaseAuth.getInstance()
-
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         emailField = findViewById(R.id.emailField)
@@ -45,22 +46,56 @@ class LoginActivity : AppCompatActivity() {
         registerButton = findViewById(R.id.registerButton)
         dealershipName = findViewById(R.id.logoTextDealershipName)
 
+        val emailErrorText = findViewById<TextView>(R.id.emailErrorText)
+        val passwordErrorText = findViewById<TextView>(R.id.passwordErrorText)
+
         setupUI(dealershipName)
 
         loginButton.setOnClickListener {
-            email = emailField.text.toString()
-            password = passwordField.text.toString()
-            viewModel.loginUser(email, password)
+            hideKeyboard()
+            val email = emailField.text.toString()
+            val password = passwordField.text.toString()
+
+            if (email.isEmpty()) {
+                emailErrorText.visibility = View.VISIBLE
+                emailErrorText.text = "Email vazio"
+            } else {
+                emailErrorText.visibility = View.GONE
+            }
+
+            if (password.isEmpty()) {
+                passwordErrorText.visibility = View.VISIBLE
+                passwordErrorText.text = "Senha vazia"
+            } else {
+                passwordErrorText.visibility = View.GONE
+            }
+
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                viewModel.loginUser(email, password)
+            }
         }
 
+        val clickAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.button_highlight)
+
+        clickAnimation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {}
+            override fun onAnimationEnd(animation: Animation?) {
+                forgotPasswordTextButton.clearAnimation()
+                registerButton.clearAnimation()
+            }
+            override fun onAnimationRepeat(animation: Animation?) {}
+        })
+
         forgotPasswordTextButton.setOnClickListener {
+            it.startAnimation(clickAnimation)
             Navigator().navigateToActivity(this, SendEmailActivity::class.java)
         }
 
-
         registerButton.setOnClickListener {
+            it.startAnimation(clickAnimation)
             Navigator().navigateToActivity(this, RegisterActivity::class.java)
         }
+
         observeViewModel()
     }
 
@@ -81,14 +116,14 @@ class LoginActivity : AppCompatActivity() {
             if (success) {
                 setFirstLoginFlag(false)
                 redirectToHome()
-                Toast.makeText(this, "Login bem sucedido!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Login bem sucedido!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Email ou Senha inválidos!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Email ou Senha inválidos!", Toast.LENGTH_SHORT).show()
             }
         }
         viewModel.loginResult.observe(this, loginObserver)
 
-        val loggedUserObserver = Observer<Boolean>{success->
+        val loggedUserObserver = Observer<Boolean>{ success ->
             if(success){
                 redirectToHome()
             }
@@ -116,5 +151,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
+    private fun hideKeyboard() {
+        val view = currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
 }
