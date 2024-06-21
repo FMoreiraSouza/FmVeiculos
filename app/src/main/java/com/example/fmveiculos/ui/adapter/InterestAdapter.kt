@@ -103,6 +103,7 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
         val buttonNo = popupView.findViewById<Button>(R.id.buttonNo)
 
 
+        // Dentro do buttonYes.setOnClickListener
         buttonYes.setOnClickListener {
             val currentMonth = SimpleDateFormat("yyyy-MM").format(Date())
             val confirmationDocRef = firestore.collection("confirmations").document(currentMonth)
@@ -136,6 +137,19 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
                 interests.remove(interest)
                 notifyDataSetChanged()
                 popupWindow.dismiss()
+
+                // Show custom toast message
+                val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                val layout = inflater.inflate(R.layout.toast_custom, null)
+
+                val textMessage = layout.findViewById<TextView>(R.id.textMessage)
+                textMessage.text = "Seu pedido foi enviado para processamento em nosso sistema central!"
+
+                with(Toast(context)) {
+                    duration = Toast.LENGTH_LONG
+                    view = layout
+                    show()
+                }
             }.addOnFailureListener { e ->
                 Log.e("InterestAdapter", "Error updating status", e)
                 Toast.makeText(context, "Erro ao confirmar interesse", Toast.LENGTH_SHORT).show()

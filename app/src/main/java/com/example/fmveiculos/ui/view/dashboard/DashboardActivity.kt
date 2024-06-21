@@ -35,10 +35,6 @@ class DashboardActivity : AppCompatActivity() {
             Navigator().navigateToActivity(this, HomeAdminActivity::class.java)
         }
 
-        val selectMonthButton = findViewById<Button>(R.id.select_month_button)
-        selectMonthButton.setOnClickListener {
-            showMonthSelectionDialog()
-        }
     }
 
     override fun onStart() {

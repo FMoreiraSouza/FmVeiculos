@@ -15,6 +15,7 @@ import com.example.fmveiculos.R
 import com.example.fmveiculos.ui.adapter.ImageAdapter
 import com.example.fmveiculos.ui.view.auth.LoginActivity
 import com.example.fmveiculos.ui.view.interests.HistoricActivity
+import com.example.fmveiculos.utils.Navigator
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -43,7 +44,7 @@ class HomeClientActivity : AppCompatActivity() {
                     val intent = Intent(this, SettingsActivity::class.java)
                     intent.putExtra("originActivity", this::class.java.name)
                     startActivity(intent)
-                    shouldClearMenuFocus = true // Marca para limpar o foco do menu ao retornar
+                    shouldClearMenuFocus = true
                     true
                 }
                 R.id.interests -> {
@@ -55,9 +56,7 @@ class HomeClientActivity : AppCompatActivity() {
                 }
                 R.id.action_logout -> {
                     auth.signOut()
-                    val intent = Intent(this, LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
+                    Navigator().navigateToActivity(this, LoginActivity::class.java)
                     finish()
                     true
                 }
