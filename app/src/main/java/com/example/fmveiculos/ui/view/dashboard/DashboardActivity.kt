@@ -106,19 +106,7 @@ class DashboardActivity : AppCompatActivity() {
                 aaOptions.yAxis = aaYAxis
                 aaChartView.aa_refreshChartWithChartOptions(aaOptions)
             }
-            .addOnFailureListener { exception ->
-                // Trate a falha na obtenção dos dados aqui
-            }
+            .addOnFailureListener { exception -> }
     }
 
-    private fun showMonthSelectionDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Selecione o Mês")
-
-        builder.setItems(months.toTypedArray()) { dialog, which ->
-            loadDataAndDrawChart(months[which])
-        }
-
-        builder.show()
-    }
 }

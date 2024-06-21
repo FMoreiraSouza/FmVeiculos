@@ -14,7 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.fmveiculos.R
 import com.example.fmveiculos.ui.adapter.SquareAdapter
 import com.example.fmveiculos.ui.view.auth.LoginActivity
-import com.example.fmveiculos.ui.view.interests.HistoricActivity
+import com.example.fmveiculos.ui.view.interests.HistoricAdminActivity
 import com.example.fmveiculos.utils.Navigator
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -48,10 +48,7 @@ class HomeAdminActivity : AppCompatActivity() {
                     true
                 }
                 R.id.interests -> {
-                    val intent = Intent(this, HistoricActivity::class.java)
-                    intent.putExtra("originActivity", this::class.java.name)
-                    startActivity(intent)
-                    shouldClearMenuFocus = true
+                    Navigator().navigateToActivity(this, HistoricAdminActivity::class.java)
                     true
                 }
                 R.id.action_logout -> {

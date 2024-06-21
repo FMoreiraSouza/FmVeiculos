@@ -1,5 +1,6 @@
+package com.example.fmveiculos.ui.adapter
+
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.*
 import android.widget.*
@@ -32,7 +33,7 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
                 notifyDataSetChanged()
             }
             .addOnFailureListener { exception ->
-                Log.e("InterestAdapter", "Error fetching data", exception)
+                Log.e("com.example.fmveiculos.ui.adapter.InterestAdapter", "Error fetching data", exception)
             }
     }
 
@@ -78,7 +79,7 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
                 viewHolder.interestDateTextView.text = "Data Inválida"
             }
         } catch (e: Exception) {
-            Log.e("InterestAdapter", "Error parsing or formatting date", e)
+            Log.e("com.example.fmveiculos.ui.adapter.InterestAdapter", "Error parsing or formatting date", e)
             viewHolder.interestDateTextView.text = "Data Inválida"
         }
 
@@ -102,79 +103,118 @@ class InterestAdapter(private val context: Context) : BaseAdapter() {
         val buttonYes = popupView.findViewById<Button>(R.id.buttonYes)
         val buttonNo = popupView.findViewById<Button>(R.id.buttonNo)
 
-
-        // Dentro do buttonYes.setOnClickListener
         buttonYes.setOnClickListener {
-            val currentMonth = SimpleDateFormat("yyyy-MM").format(Date())
-            val confirmationDocRef = firestore.collection("confirmations").document(currentMonth)
+            firestore.collection("cars").document(interest.carId)
+                .get()
+                .addOnSuccessListener { documentSnapshot ->
+                    val currentQuantity = documentSnapshot.getLong("quantity") ?: 0
+                    if (currentQuantity > 0) {
+                        // Decrementa a quantidade
+                        val newQuantity = currentQuantity - 1
+                        // Atualiza a quantidade no Firestore
+                        firestore.collection("cars").document(interest.carId)
+                            .update("quantity", newQuantity)
+                            .addOnSuccessListener {
+                                Log.d("InterestAdapter", "Quantity decremented successfully")
+                                // Atualiza o status do interesse para "Confirmado" no Firestore
+                                firestore.runTransaction { transaction ->
+                                    // Referência para o documento de confirmações do mês atual
+                                    val currentMonth = SimpleDateFormat("yyyy-MM").format(Date())
+                                    val confirmationDocRef = firestore.collection("confirmations").document(currentMonth)
 
-            firestore.runTransaction { transaction ->
-                val snapshot = transaction.get(confirmationDocRef)
+                                    // Lógica para incrementar o contador de confirmações no documento
+                                    val snapshot = transaction.get(confirmationDocRef)
+                                    if (snapshot.exists()) {
+                                        val currentCount = snapshot.getLong("count") ?: 0
+                                        transaction.update(confirmationDocRef, "count", currentCount + 1)
+                                    } else {
+                                        val data = hashMapOf(
+                                            "count" to 1,
+                                            "month" to currentMonth
+                                        )
+                                        transaction.set(confirmationDocRef, data)
+                                    }
 
-                if (snapshot.exists()) {
-                    val currentCount = snapshot.getLong("count") ?: 0
-                    transaction.update(confirmationDocRef, "count", currentCount + 1)
-                } else {
-                    val data = hashMapOf(
-                        "count" to 1,
-                        "month" to currentMonth
-                    )
-                    transaction.set(confirmationDocRef, data)
+                                    // Atualiza o status do interesse para "Confirmado" no documento de interesses
+                                    transaction.update(
+                                        firestore.collection("interests").document(interest.id),
+                                        "status",
+                                        "Confirmado"
+                                    )
+
+                                    // Atualiza o nome do carro no documento de confirmações
+                                    transaction.update(confirmationDocRef, "carName", interest.carName)
+                                }.addOnSuccessListener {
+                                    Log.d("InterestAdapter", "Status updated successfully")
+                                    interest.status = "Confirmado"
+                                    interests.remove(interest)
+                                    notifyDataSetChanged()
+                                    popupWindow.dismiss()
+
+                                    // Mostra um toast personalizado indicando que o pedido foi confirmado
+                                    showCustomToast("Seu pedido foi confirmado com sucesso e será processado em nosso sistema central!")
+                                }.addOnFailureListener { e ->
+                                    Log.e("InterestAdapter", "Error updating status or confirmation count", e)
+                                    Toast.makeText(context, "Erro ao confirmar interesse", Toast.LENGTH_SHORT).show()
+                                    popupWindow.dismiss()
+                                }
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("InterestAdapter", "Error decrementing quantity", e)
+                                Toast.makeText(context, "Erro ao decrementar quantidade", Toast.LENGTH_SHORT).show()
+                                popupWindow.dismiss()
+                            }
+                    } else {
+                        Toast.makeText(context, "Quantidade insuficiente do carro", Toast.LENGTH_SHORT).show()
+                        popupWindow.dismiss()
+                    }
                 }
-
-                // Update the interests collection document status to "Confirmado"
-                transaction.update(
-                    firestore.collection("interests").document(interest.id),
-                    "status",
-                    "Confirmado"
-                )
-
-                // Add carName to the confirmation document
-                transaction.update(confirmationDocRef, "carName", interest.carName)
-            }.addOnSuccessListener {
-                Log.d("InterestAdapter", "Status updated successfully")
-                interest.status = "Confirmado"
-                interests.remove(interest)
-                notifyDataSetChanged()
-                popupWindow.dismiss()
-
-                // Show custom toast message
-                val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                val layout = inflater.inflate(R.layout.toast_custom, null)
-
-                val textMessage = layout.findViewById<TextView>(R.id.textMessage)
-                textMessage.text = "Seu pedido foi enviado para processamento em nosso sistema central!"
-
-                with(Toast(context)) {
-                    duration = Toast.LENGTH_LONG
-                    view = layout
-                    show()
+                .addOnFailureListener { e ->
+                    Log.e("InterestAdapter", "Error fetching car quantity", e)
+                    Toast.makeText(context, "Erro ao obter quantidade do carro", Toast.LENGTH_SHORT).show()
+                    popupWindow.dismiss()
                 }
-            }.addOnFailureListener { e ->
-                Log.e("InterestAdapter", "Error updating status", e)
-                Toast.makeText(context, "Erro ao confirmar interesse", Toast.LENGTH_SHORT).show()
-                popupWindow.dismiss()
-            }
         }
-
 
 
         buttonNo.setOnClickListener {
             firestore.collection("interests").document(interest.id).update("status", "Cancelado")
                 .addOnSuccessListener {
-                    Log.d("InterestAdapter", "Status updated successfully")
+                    Log.d("com.example.fmveiculos.ui.adapter.InterestAdapter", "Status updated successfully")
                     interest.status = "Cancelado"
                     interests.remove(interest)
                     notifyDataSetChanged()
                     popupWindow.dismiss()
+
+                    // Mostra um toast indicando que o interesse foi cancelado
+                    Toast.makeText(context, "Interesse cancelado", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener { e ->
-                    Log.e("InterestAdapter", "Error updating status", e)
+                    Log.e("com.example.fmveiculos.ui.adapter.InterestAdapter", "Error updating status", e)
                     Toast.makeText(context, "Erro ao cancelar interesse", Toast.LENGTH_SHORT).show()
                     popupWindow.dismiss()
                 }
         }
     }
+
+    private fun showCustomToast(message: String) {
+        // Infla o layout customizado
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val layout = inflater.inflate(R.layout.toast_custom, null)
+
+        // Configura o texto da mensagem no TextView do layout customizado
+        val textMessage = layout.findViewById<TextView>(R.id.textMessage)
+        textMessage.text = message
+
+        // Cria e configura o Toast
+        with (Toast(context)) {
+            setGravity(Gravity.CENTER, 0, 0)
+            duration = Toast.LENGTH_LONG
+            view = layout
+            show()
+        }
+    }
+
 
     private class ViewHolder(view: View) {
         val clientNameTextView: TextView = view.findViewById(R.id.textViewClientName)

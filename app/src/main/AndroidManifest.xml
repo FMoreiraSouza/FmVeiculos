@@ -15,16 +15,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FMVeiculos"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.view.interests.HistoricAdminActivity"
+            android:exported="false" />
         <activity android:name=".ui.view.auth.SendEmailActivity" />
-        <activity android:name=".ui.view.interests.HistoricActivity" />
+        <activity android:name=".ui.view.interests.HistoricClientActivity" />
         <activity android:name=".ui.view.home.SettingsActivity" />
-        <activity android:name=".ui.view.dealership.CarDetailsHomeActivity" />
+        <activity android:name=".ui.view.details.CarDetailsHomeActivity" />
         <activity android:name=".ui.view.auth.RegisterActivity" />
         <activity android:name=".ui.view.interests.InterestActivity" />
         <activity android:name=".ui.view.dashboard.DashboardActivity" />
         <activity android:name=".ui.view.vehicles.VehiclesActivity" />
         <activity android:name=".ui.view.restocking.RestockingActivity" />
-        <activity android:name=".ui.view.dealership.CarDetailsClientActivity" />
+        <activity android:name=".ui.view.details.CarDetailsClientActivity" />
         <activity android:name=".ui.view.home.HomeClientActivity" />
         <activity android:name=".ui.view.home.HomeAdminActivity" />
         <activity

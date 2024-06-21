@@ -7,7 +7,7 @@
     android:background="@android:color/white"
     android:gravity="top"
     android:orientation="vertical"
-    tools:context=".ui.view.dealership.CarDetailsHomeActivity">
+    tools:context=".ui.view.details.CarDetailsHomeActivity">
 
     <!-- Toolbar -->
     <com.google.android.material.appbar.AppBarLayout
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="?attr/actionBarSize"
-            tools:context=".ui.view.dealership.CarDetailsHomeActivity">
+            tools:context=".ui.view.details.CarDetailsHomeActivity">
 
             <!-- Your existing content here -->
             <TextView
@@ -124,6 +124,18 @@
                 android:justificationMode="inter_word"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btnUpdateFields"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="#FFFFFF"
+                android:text="Atualizar Campos"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="confirmInterest" />
 
         </LinearLayout>
 

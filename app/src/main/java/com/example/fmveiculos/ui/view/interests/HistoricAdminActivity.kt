@@ -8,35 +8,34 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fmveiculos.R
-import com.example.fmveiculos.ui.adapter.InterestListAdapter
-import com.example.fmveiculos.utils.Navigator
+import com.example.fmveiculos.ui.adapter.HistoricAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.fmveiculos.model.InterestModel
 import com.example.fmveiculos.ui.view.home.HomeAdminActivity
 import com.example.fmveiculos.ui.view.home.HomeClientActivity
+import com.example.fmveiculos.utils.Navigator
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HistoricActivity : AppCompatActivity() {
+class HistoricAdminActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: InterestListAdapter
-    private var originActivity: String? = null
+    private lateinit var adapter: HistoricAdapter
     private val interestsList = mutableListOf<InterestModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_historic)
+        setContentView(R.layout.activity_historic_admin)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
 
         toolbar.setNavigationOnClickListener {
-            handleNavigationClick()
+            Navigator().navigateToActivity(this, HomeAdminActivity::class.java)
         }
 
         recyclerView = findViewById(R.id.recyclerViewInterests)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = InterestListAdapter(interestsList)
+        adapter = HistoricAdapter(interestsList)
         recyclerView.adapter = adapter
 
         fetchInterestsFromFirestore()
@@ -50,6 +49,7 @@ class HistoricActivity : AppCompatActivity() {
                 for (document in querySnapshot.documents) {
                     val id = ""
                     val userId = ""
+                    val carId = ""
                     val clientName = ""
                     val carName = document.getString("carName") ?: ""
                     val carPrice = document.getDouble("carPrice") ?: 0.0
@@ -59,7 +59,7 @@ class HistoricActivity : AppCompatActivity() {
                     // Formatar a data
                     val formattedTimestamp = formatFirebaseTimestamp(timestamp)
 
-                    val interest = InterestModel(id, userId,clientName, carName, carPrice, formattedTimestamp, status)
+                    val interest = InterestModel(id, userId, carId, clientName, carName, carPrice, formattedTimestamp, status)
                     interestsList.add(interest)
                 }
                 adapter.notifyDataSetChanged()
@@ -81,21 +81,6 @@ class HistoricActivity : AppCompatActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
             "Data Inválida"
-        }
-    }
-
-    private fun handleNavigationClick() {
-        when (originActivity) {
-            HomeClientActivity::class.java.name -> {
-                finish()
-            }
-            HomeAdminActivity::class.java.name -> {
-                finish()
-            }
-            else -> {
-                Log.e(ContentValues.TAG, "Tela de origem desconhecida: $originActivity")
-                finish()
-            }
         }
     }
 }

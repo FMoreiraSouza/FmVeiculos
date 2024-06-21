@@ -10,10 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fmveiculos.R
 
-class InterestListAdapter(private val interests: List<InterestModel>) :
-    RecyclerView.Adapter<InterestListAdapter.InterestViewHolder>() {
+class HistoricAdapter(private val interests: List<InterestModel>) :
+    RecyclerView.Adapter<HistoricAdapter.HistoricViewHolder>() {
 
-    inner class InterestViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class HistoricViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val carNameTextView: TextView = itemView.findViewById(R.id.textCarName)
         private val statusTextView: TextView = itemView.findViewById(R.id.textStatus)
         private val statusImageView: ImageView = itemView.findViewById(R.id.imageStatus)
@@ -47,12 +47,12 @@ class InterestListAdapter(private val interests: List<InterestModel>) :
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InterestViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoricViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_interest, parent, false)
-        return InterestViewHolder(view)
+        return HistoricViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: InterestViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HistoricViewHolder, position: Int) {
         val interest = interests[position]
         holder.bind(interest)
     }

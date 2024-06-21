@@ -1,6 +1,6 @@
 package com.example.fmveiculos.ui.view.restocking
 
-import CarModel
+import com.example.fmveiculos.model.CarModel
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Build
@@ -14,13 +14,11 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import com.example.fmveiculos.R
 import com.example.fmveiculos.utils.Navigator
 import com.example.fmveiculos.ui.view.home.HomeAdminActivity
 import com.example.fmveiculos.viewModel.restocking.RestockingViewModel
-import com.google.android.material.navigation.NavigationView
 
 class RestockingActivity : AppCompatActivity() {
 

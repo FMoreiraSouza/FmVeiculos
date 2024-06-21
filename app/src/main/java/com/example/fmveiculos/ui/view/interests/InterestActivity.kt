@@ -1,15 +1,13 @@
 package com.example.fmveiculos.ui.view.interests
 
-import InterestAdapter
+import com.example.fmveiculos.ui.adapter.InterestAdapter
 import android.os.Bundle
 import android.widget.GridView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
 import com.example.fmveiculos.R
 import com.example.fmveiculos.ui.view.home.HomeAdminActivity
 import com.example.fmveiculos.utils.Navigator
-import com.google.android.material.navigation.NavigationView
 
 class InterestActivity : AppCompatActivity() {
 

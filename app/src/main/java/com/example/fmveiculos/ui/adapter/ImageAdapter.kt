@@ -1,6 +1,6 @@
 package com.example.fmveiculos.ui.adapter
 
-import CarModel
+import com.example.fmveiculos.model.CarModel
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Context

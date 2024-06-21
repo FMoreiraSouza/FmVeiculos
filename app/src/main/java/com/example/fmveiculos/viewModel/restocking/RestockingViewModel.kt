@@ -1,6 +1,6 @@
 package com.example.fmveiculos.viewModel.restocking
 
-import CarModel
+import com.example.fmveiculos.model.CarModel
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.lifecycle.ViewModel
@@ -68,7 +68,9 @@ class RestockingViewModel : ViewModel() {
         val db = FirebaseFirestore.getInstance()
         db.collection("cars")
             .add(car)
-            .addOnSuccessListener {
+            .addOnSuccessListener {documentReference->
+                val documentId = documentReference.id
+                documentReference.update("id", documentId)
                 onSuccess()
             }
             .addOnFailureListener {

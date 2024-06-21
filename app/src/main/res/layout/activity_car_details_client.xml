@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="?attr/actionBarSize"
-            tools:context=".ui.view.dealership.CarDetailsClientActivity">
+            tools:context=".ui.view.details.CarDetailsClientActivity">
 
             <!-- Your existing content here -->
             <TextView

@@ -1,7 +1,6 @@
-package com.example.fmveiculos.ui.view.dealership
+package com.example.fmveiculos.ui.view.details
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.icu.util.Calendar
@@ -122,11 +121,10 @@ class CarDetailsClientActivity : AppCompatActivity() {
         if (userId != null) {
             val userDocRef = db.collection("userInfo").document(userId)
 
-            // Recuperar o documento
             userDocRef.get()
-                .addOnSuccessListener { document ->
-                    if (document != null && document.contains("name")) {
-                        val name = document.getString("name")
+                .addOnSuccessListener { userDocument ->
+                    if (userDocument != null && userDocument.contains("name")) {
+                        val name = userDocument.getString("name")
                         Log.d("MainActivity", "Name: $name")
 
                         val carName = intent.getStringExtra("carName")
@@ -134,57 +132,92 @@ class CarDetailsClientActivity : AppCompatActivity() {
                         val timestamp = Calendar.getInstance().time.toString()
                         val status = "Pendente"
 
-                        val interestData = hashMapOf(
-                            "userId" to userId,
-                            "name" to name,
-                            "carName" to carName,
-                            "carPrice" to carPrice,
-                            "timestamp" to timestamp,
-                            "status" to status
-                        )
+                        // Verificar se a quantidade do carro é maior que 0
+                        val carQuantity = intent.getIntExtra("carQuantity", 0)
+                        if (carQuantity > 0) {
+                            // Processar o interesse apenas se a quantidade for maior que 0
+                            db.collection("cars").whereEqualTo("name", carName)
+                                .get()
+                                .addOnSuccessListener { carDocuments ->
+                                    if (carDocuments != null && !carDocuments.isEmpty) {
+                                        val carDocument = carDocuments.documents[0]
+                                        val carId = carDocument.id
 
-                        // Adicionar o documento à coleção e obter a referência do documento
-                        db.collection("interests")
-                            .add(interestData)
-                            .addOnSuccessListener { documentReference ->
-                                // Obter o ID do documento gerado
-                                val documentId = documentReference.id
+                                        val interestData = hashMapOf(
+                                            "carId" to carId,
+                                            "userId" to userId,
+                                            "name" to name,
+                                            "carName" to carName,
+                                            "carPrice" to carPrice,
+                                            "timestamp" to timestamp,
+                                            "status" to status
+                                        )
 
-                                // Atualizar o documento recém-criado com o ID
-                                documentReference.update("id", documentId)
-                                    .addOnSuccessListener {
+                                        db.collection("interests")
+                                            .add(interestData)
+                                            .addOnSuccessListener { documentReference ->
+                                                val documentId = documentReference.id
+                                                documentReference.update("id", documentId)
+                                                    .addOnSuccessListener {
+                                                        Toast.makeText(
+                                                            this,
+                                                            "Interesse de pedido salvo com sucesso",
+                                                            Toast.LENGTH_LONG
+                                                        ).show()
+                                                    }
+                                                    .addOnFailureListener { e ->
+                                                        Toast.makeText(
+                                                            this,
+                                                            "Erro ao salvar o ID do documento",
+                                                            Toast.LENGTH_LONG
+                                                        ).show()
+                                                    }
+                                            }
+                                            .addOnFailureListener { e ->
+                                                Toast.makeText(
+                                                    this,
+                                                    "Erro na solicitação de pedido",
+                                                    Toast.LENGTH_LONG
+                                                ).show()
+                                            }
+                                    } else {
+                                        Log.d("MainActivity", "Carro não encontrado")
                                         Toast.makeText(
                                             this,
-                                            "Interesse de pedido salvo com sucesso",
+                                            "Carro não encontrado",
                                             Toast.LENGTH_LONG
                                         ).show()
                                     }
-                                    .addOnFailureListener { e ->
-                                        Toast.makeText(
-                                            this,
-                                            "Erro ao salvar o ID do documento",
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                    }
-                            }
-                            .addOnFailureListener { e ->
-                                Toast.makeText(
-                                    this,
-                                    "Erro na solicitação de pedido",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
+                                }
+                                .addOnFailureListener { exception ->
+                                    Log.d("MainActivity", "Erro ao obter carro: ", exception)
+                                    Toast.makeText(
+                                        this,
+                                        "Erro ao obter carro",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                        } else {
+                            // Exibir o Toast de modelo indisponível se a quantidade for 0
+                            Toast.makeText(
+                                this,
+                                "Este modelo está indisponível no momento",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                     } else {
-                        Log.d("MainActivity", "Campo 'name' não encontrado no documento")
+                        Log.d("MainActivity", "Campo 'name' não encontrado no documento do usuário")
                     }
                 }
                 .addOnFailureListener { exception ->
-                    Log.d("MainActivity", "Erro ao obter documento: ", exception)
+                    Log.d("MainActivity", "Erro ao obter documento do usuário: ", exception)
                 }
         } else {
             Toast.makeText(this, "Usuário não autenticado", Toast.LENGTH_LONG).show()
         }
     }
+
+
 
 
 }

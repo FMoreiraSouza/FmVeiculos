@@ -1,9 +1,12 @@
+package com.example.fmveiculos.model
+
 import android.content.Context
 import android.content.Intent
-import com.example.fmveiculos.ui.view.dealership.CarDetailsClientActivity
-import com.example.fmveiculos.ui.view.dealership.CarDetailsHomeActivity
+import com.example.fmveiculos.ui.view.details.CarDetailsClientActivity
+import com.example.fmveiculos.ui.view.details.CarDetailsHomeActivity
 
 data class CarModel(
+    val id: String = "",
     var name: String = "",
     var imageResource: String = "",
     var description: String = "",
