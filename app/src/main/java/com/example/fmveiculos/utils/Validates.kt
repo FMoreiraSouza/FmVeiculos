@@ -1,44 +1,23 @@
 package com.example.fmveiculos.utils
 
 fun isValidCPF(cpf: String): Boolean {
-    // Limpar caracteres especiais e espaços
-    val cleanedCPF = cpf.replace("[^\\d]".toRegex(), "")
+    val cleanCpf = cpf.replace("[^0-9]".toRegex(), "")
+    if (cleanCpf.length != 11 || cleanCpf.all { it == cleanCpf[0] }) return false
 
-    // Verificar se o CPF possui 11 dígitos
-    if (cleanedCPF.length != 11)
-        return false
-
-    // Verificar se todos os dígitos são iguais (caso trivial de CPF inválido)
-    if (cleanedCPF == "00000000000" || cleanedCPF == "11111111111" ||
-        cleanedCPF == "22222222222" || cleanedCPF == "33333333333" ||
-        cleanedCPF == "44444444444" || cleanedCPF == "55555555555" ||
-        cleanedCPF == "66666666666" || cleanedCPF == "77777777777" ||
-        cleanedCPF == "88888888888" || cleanedCPF == "99999999999")
-        return false
-
-    // Calcula o primeiro dígito verificador
-    var sum = 0
-    var weight = 10
-    for (i in 0 until 9) {
-        sum += Integer.parseInt(cleanedCPF[i].toString()) * weight
-        weight--
+    fun calculateDigit(cpf: String, weight: IntArray): Int {
+        var sum = 0
+        for (i in weight.indices) {
+            sum += cpf[i].toString().toInt() * weight[i]
+        }
+        val remainder = sum % 11
+        return if (remainder < 2) 0 else 11 - remainder
     }
-    var digit = 11 - sum % 11
-    if (digit >= 10) digit = 0
-    if (digit != Integer.parseInt(cleanedCPF[9].toString()))
-        return false
 
-    // Calcula o segundo dígito verificador
-    sum = 0
-    weight = 11
-    for (i in 0 until 10) {
-        sum += Integer.parseInt(cleanedCPF[i].toString()) * weight
-        weight--
-    }
-    digit = 11 - sum % 11
-    if (digit >= 10) digit = 0
-    if (digit != Integer.parseInt(cleanedCPF[10].toString()))
-        return false
+    val weight1 = intArrayOf(10, 9, 8, 7, 6, 5, 4, 3, 2)
+    val weight2 = intArrayOf(11, 10, 9, 8, 7, 6, 5, 4, 3, 2)
 
-    return true
+    val digit1 = calculateDigit(cleanCpf, weight1)
+    val digit2 = calculateDigit(cleanCpf, weight2)
+
+    return cleanCpf[9].toString().toInt() == digit1 && cleanCpf[10].toString().toInt() == digit2
 }
