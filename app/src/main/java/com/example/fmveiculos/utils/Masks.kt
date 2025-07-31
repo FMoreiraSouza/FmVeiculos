@@ -3,7 +3,6 @@ package com.example.fmveiculos.utils
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import kotlin.text.iterator
 
 class Masks(private val editText: EditText) : TextWatcher {
 
@@ -18,17 +17,18 @@ class Masks(private val editText: EditText) : TextWatcher {
         if (isUpdating) return
 
         isUpdating = true
-        val unmasked = s.toString().replace("[^0-9]".toRegex(), "")
+        val unmasked = s.toString().replace("[^0-9]".toRegex(), "").take(11) // Limita a 11 dígitos
         val masked = StringBuilder()
 
         var i = 0
         for (m in mask) {
-            if (m != '#' || i >= unmasked.length) break
-            masked.append(unmasked[i])
-            if (i < unmasked.length - 1 && (i == 2 || i == 5 || i == 8)) {
-                masked.append(if (i == 8) '-' else '.')
+            if (i >= unmasked.length) break
+            if (m == '#') {
+                masked.append(unmasked[i])
+                i++
+            } else {
+                masked.append(m)
             }
-            i++
         }
 
         editText.setText(masked.toString())

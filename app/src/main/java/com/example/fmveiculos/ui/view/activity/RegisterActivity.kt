@@ -55,7 +55,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
             presenter.register(
                 emailField.text.toString(),
                 passwordField.text.toString(),
-                cpfField.text.toString(),
+                cpfField.text.toString().replace("[^0-9]".toRegex(), ""),
                 nameField.text.toString(),
                 cityField.text.toString(),
                 stateField.text.toString()
@@ -69,7 +69,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
     override fun showSuccess() {
         Toast.makeText(this, "Cadastro bem sucedido", Toast.LENGTH_LONG).show()
-        setFirstLoginFlag(true)
+        setFirstLoginFlag()
     }
 
     override fun navigateToLogin() {
@@ -81,10 +81,10 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     @SuppressLint("UseKtx")
-    private fun setFirstLoginFlag(isFirstLogin: Boolean) {
-        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+    private fun setFirstLoginFlag() {
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         with(sharedPreferences.edit()) {
-            putBoolean("is_first_login", isFirstLogin)
+            putBoolean("is_first_login", true)
             apply()
         }
     }

@@ -3,6 +3,7 @@ package com.example.fmveiculos.data.repository
 import com.example.fmveiculos.data.model.UserInfoModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
@@ -32,8 +33,8 @@ class AuthRepository {
             Pair(true, null)
         } catch (_: FirebaseAuthUserCollisionException) {
             Pair(false, "EMAIL_EXISTS")
-        } catch (_: Exception) {
-            Pair(false, "OTHER")
+        } catch (e: Exception) {
+            Pair(false, "$e")
         }
     }
 
@@ -61,6 +62,10 @@ class AuthRepository {
 
     fun getCurrentUserEmail(): String? {
         return auth.currentUser?.email
+    }
+
+    fun getCurrentUser(): FirebaseUser? {
+        return auth.currentUser
     }
 
     fun sendPasswordResetEmail(email: String): Boolean {

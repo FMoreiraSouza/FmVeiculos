@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@android:color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.view.interests.HistoricClientActivity">
+    android:background="@android:color/white"
+    tools:context=".ui.view.activity.HistoricClientActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -24,24 +23,20 @@
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Histórico"
+                android:layout_gravity="center"
+                android:text="@string/histórico"
                 android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:layout_gravity="center" />
-
+                android:textSize="20sp" />
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- RecyclerView for Interests -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewInterests"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        android:padding="16dp"
         android:clipToPadding="false"
+        android:padding="16dp"
         android:scrollbars="vertical"
         tools:listitem="@layout/item_interest" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

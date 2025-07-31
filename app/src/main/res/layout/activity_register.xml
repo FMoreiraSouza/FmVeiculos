@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.view.auth.RegisterActivity">
+    android:background="@android:color/white"
+    tools:context=".ui.view.activity.RegisterActivity">
 
-    <!-- AppBar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -21,14 +19,12 @@
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cadastro"
+            android:layout_gravity="center"
+            android:text="@string/cadastro"
             android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:layout_gravity="center" />
-
+            android:textSize="20sp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Formulário de Cadastro -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,117 +36,127 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Campo Nome -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextColor="@color/colorPrimary"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                app:hintTextColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nome"
+                    android:hint="@string/nome"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@id/editTextEmail"
+                    android:singleLine="true"
                     android:textColor="@android:color/black"
-                    android:textColorHint="@color/colorPrimary"/>
+                    android:textColorHint="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo Email -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextColor="@color/colorPrimary"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                app:hintTextColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:nextFocusDown="@id/editTextSenha"
+                    android:singleLine="true"
                     android:textColor="@android:color/black"
-                    android:textColorHint="@color/colorPrimary"
-                    android:inputType="textEmailAddress" />
+                    android:textColorHint="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo Senha -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextColor="@color/colorPrimary"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                app:hintTextColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextSenha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Senha"
-                    android:textColorHint="@color/colorPrimary"
+                    android:hint="@string/senha"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:nextFocusDown="@id/editTextCPF"
+                    android:singleLine="true"
                     android:textColor="@android:color/black"
-                    android:inputType="textPassword"/>
+                    android:textColorHint="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo CPF -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextColor="@color/colorPrimary"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                app:hintTextColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextCPF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="CPF"
+                    android:hint="@string/cpf"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="14"
+                    android:nextFocusDown="@id/editTextCity"
+                    android:singleLine="true"
                     android:textColor="@android:color/black"
-                    android:textColorHint="@color/colorPrimary"
-                    android:inputType="number" />
+                    android:textColorHint="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo Cidade -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextColor="@color/colorPrimary"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                app:hintTextColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Cidade"
+                    android:hint="@string/cidade"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@id/editTextState"
+                    android:singleLine="true"
                     android:textColor="@android:color/black"
                     android:textColorHint="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo Estado -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextColor="@color/colorPrimary"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                app:hintTextColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Estado"
+                    android:hint="@string/estado"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
                     android:textColor="@android:color/black"
-                    android:textColorHint="@color/colorPrimary"/>
+                    android:textColorHint="@color/colorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Botão de Cadastro -->
             <Button
                 android:id="@+id/buttonFinishRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:padding="12dp"
-                android:text="Cadastrar"
-                android:textAllCaps="false"
                 android:backgroundTint="@color/colorPrimary"
+                android:padding="12dp"
+                android:text="@string/cadastrar"
+                android:textAllCaps="false"
                 android:textColor="@android:color/white" />
         </LinearLayout>
     </ScrollView>
-
 </RelativeLayout>

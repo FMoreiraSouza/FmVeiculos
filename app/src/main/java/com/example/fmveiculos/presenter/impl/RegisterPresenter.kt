@@ -34,22 +34,27 @@ class RegisterPresenter(
         CoroutineScope(Dispatchers.Main).launch {
             val (success, error) = authRepository.registerUser(email, password, cpf)
             if (success) {
+                val userId = authRepository.getCurrentUser()?.uid ?: ""
                 val userInfo = UserInfoModel(
-                    id = authRepository.getCurrentUserEmail()?.let { authRepository.checkLoggedUser().toString() } ?: "",
+                    id = userId, // Usa o UID do Firebase como ID
                     name = name,
                     cpf = cpf,
                     city = city,
                     state = state
                 )
-                authRepository.saveUserInfo(userInfo)
-                view.showSuccess()
-                view.navigateToLogin()
+                val saveSuccess = authRepository.saveUserInfo(userInfo)
+                if (saveSuccess) {
+                    view.showSuccess()
+                    view.navigateToLogin()
+                } else {
+                    view.showError("Erro ao salvar informações do usuário")
+                }
             } else {
                 when (error) {
                     "EMAIL_EXISTS" -> view.showError("E-mail já cadastrado")
                     "CPF_EXISTS" -> view.showError("CPF já cadastrado")
                     "DOMAIN_NOT_ALLOWED" -> view.showError("Clientes não podem ser cadastrados no domínio fmveiculos.com")
-                    else -> view.showError("Erro ao cadastrar")
+                    else -> view.showError("Erro ao cadastrar: $error")
                 }
             }
         }
