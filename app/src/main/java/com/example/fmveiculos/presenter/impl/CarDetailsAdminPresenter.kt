@@ -1,13 +1,13 @@
 package com.example.fmveiculos.presenter.impl
 
-import com.example.fmveiculos.data.repository.CarRepository
 import com.example.fmveiculos.data.model.CarModel
+import com.example.fmveiculos.data.repository.CarRepository
 import com.example.fmveiculos.presenter.contract.CarDetailsHomeContract
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CarDetailsHomePresenter(
+class CarDetailsAdminPresenter(
     private val view: CarDetailsHomeContract.View,
     private val carRepository: CarRepository
 ) : CarDetailsHomeContract.Presenter {

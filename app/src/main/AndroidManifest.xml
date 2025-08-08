@@ -21,7 +21,7 @@
         <activity android:name=".ui.view.activity.SendEmailActivity" />
         <activity android:name=".ui.view.activity.HistoricClientActivity" />
         <activity android:name=".ui.view.activity.SettingsActivity" />
-        <activity android:name=".ui.view.activity.CarDetailsHomeActivity" />
+        <activity android:name=".ui.view.activity.CarDetailsAdminActivity" />
         <activity android:name=".ui.view.activity.RegisterActivity" />
         <activity android:name=".ui.view.activity.InterestActivity" />
         <activity android:name=".ui.view.activity.DashboardActivity" />

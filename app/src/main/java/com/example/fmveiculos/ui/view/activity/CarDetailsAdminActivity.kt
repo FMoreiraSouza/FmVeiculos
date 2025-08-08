@@ -2,6 +2,7 @@ package com.example.fmveiculos.ui.view.activity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -17,16 +18,15 @@ import com.bumptech.glide.Glide
 import com.example.fmveiculos.R
 import com.example.fmveiculos.data.repository.CarRepository
 import com.example.fmveiculos.presenter.contract.CarDetailsHomeContract
-import com.example.fmveiculos.presenter.impl.CarDetailsHomePresenter
+import com.example.fmveiculos.presenter.impl.CarDetailsAdminPresenter
 import com.example.fmveiculos.utils.Navigator
-import android.graphics.Typeface
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CarDetailsHomeActivity : AppCompatActivity(), CarDetailsHomeContract.View {
+class CarDetailsAdminActivity : AppCompatActivity(), CarDetailsHomeContract.View {
 
-    private lateinit var presenter: CarDetailsHomePresenter
+    private lateinit var presenter: CarDetailsAdminPresenter
     private lateinit var toolbar: Toolbar
     private lateinit var carImageView: ImageView
     private lateinit var carNameTextView: TextView
@@ -42,7 +42,7 @@ class CarDetailsHomeActivity : AppCompatActivity(), CarDetailsHomeContract.View 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_details_home)
 
-        presenter = CarDetailsHomePresenter(this, CarRepository())
+        presenter = CarDetailsAdminPresenter(this, CarRepository())
 
         toolbar = findViewById(R.id.toolbar)
         carImageView = findViewById(R.id.carImageView)

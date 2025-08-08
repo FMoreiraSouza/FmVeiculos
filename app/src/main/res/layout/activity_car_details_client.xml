@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="?attr/actionBarSize"
-            tools:context=".ui.view.details.CarDetailsClientActivity">
+            tools:context=".ui.view.activity.CarDetailsClientActivity">
 
             <TextView
                 android:id="@+id/carNameTextView"
@@ -146,14 +147,13 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/interestButton"
+                android:id="@+id/buttonConfirmInterest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:backgroundTint="@color/colorPrimary"
-                android:onClick="confirmInterest"
                 android:text="@string/interessado"
                 android:textColor="#FFFFFF" />
         </LinearLayout>

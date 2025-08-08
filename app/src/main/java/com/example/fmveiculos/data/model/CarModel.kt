@@ -2,8 +2,8 @@ package com.example.fmveiculos.data.model
 
 import android.content.Context
 import android.content.Intent
+import com.example.fmveiculos.ui.view.activity.CarDetailsAdminActivity
 import com.example.fmveiculos.ui.view.activity.CarDetailsClientActivity
-import com.example.fmveiculos.ui.view.activity.CarDetailsHomeActivity
 
 data class CarModel(
     val id: String = "",
@@ -19,7 +19,7 @@ data class CarModel(
     companion object {
         fun createIntent(context: Context, car: CarModel, hasWhatsAppLayout: Boolean): Intent {
             return if (!hasWhatsAppLayout) {
-                Intent(context, CarDetailsHomeActivity::class.java)
+                Intent(context, CarDetailsAdminActivity::class.java)
             } else {
                 Intent(context, CarDetailsClientActivity::class.java)
             }.apply {
