@@ -12,6 +12,7 @@ import com.example.fmveiculos.data.repository.AuthRepository
 import com.example.fmveiculos.presenter.contract.SettingsContract
 import com.example.fmveiculos.presenter.impl.SettingsPresenter
 import com.example.fmveiculos.utils.Navigator
+import com.google.firebase.auth.FirebaseAuth
 
 class SettingsActivity : AppCompatActivity(), SettingsContract.View {
 
@@ -40,7 +41,8 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
 
     override fun onStart() {
         super.onStart()
-        presenter.loadUserInfo(AuthRepository().getCurrentUserEmail()?.let { AuthRepository().checkLoggedUser().toString() })
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        presenter.loadUserInfo(userId)
     }
 
     @SuppressLint("SetTextI18n")
