@@ -2,12 +2,10 @@ package com.example.fmveiculos.ui.view.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
@@ -24,25 +22,35 @@ class RestockingActivity : AppCompatActivity(), RestockingContract.View {
 
     private lateinit var presenter: RestockingPresenter
     private lateinit var imageView: ImageView
-    private lateinit var noImageText: TextView
     private lateinit var nameField: EditText
     private lateinit var descriptionField: EditText
     private lateinit var priceField: EditText
     private lateinit var brandField: EditText
-    private lateinit var categorySpinner: Spinner
+    private lateinit var categoryField: EditText
     private lateinit var yearField: EditText
     private lateinit var quantityField: EditText
 
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         presenter.setSelectedImage(uri)
+        if (uri != null) {
+            imageView.setImageURI(uri)
+            Toast.makeText(this, "Imagem selecionada", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Nenhuma imagem selecionada", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    private val takePicture =
-        registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
-            presenter.setBitmapImage(bitmap)
+    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
+        presenter.setBitmapImage(bitmap)
+        if (bitmap != null) {
+            imageView.setImageBitmap(bitmap)
+            Toast.makeText(this, "Foto tirada", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Nenhuma foto tirada", Toast.LENGTH_SHORT).show()
         }
+    }
 
-    @SuppressLint("MissingInflatedId", "WrongViewCast")
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restocking)
@@ -54,23 +62,18 @@ class RestockingActivity : AppCompatActivity(), RestockingContract.View {
             navigateToHome()
         }
 
-        imageView = findViewById(R.id.carImageView)
-//        noImageText = findViewById(R.id.noImageText)
-        nameField = findViewById(R.id.carNameTextView)
-        descriptionField = findViewById(R.id.carDescriptionTextView)
-        priceField = findViewById(R.id.carPriceTextView)
-        brandField = findViewById(R.id.carBrandTextView)
-//        categorySpinner = findViewById(R.id.spinnerCategory)
-//        yearField = findViewById(R.id.editTextYear)
-//        quantityField = findViewById(R.id.editTextQuantity)
+        imageView = findViewById(R.id.imageViewProduto)
+        nameField = findViewById(R.id.editTextNome)
+        descriptionField = findViewById(R.id.editTextDescricao)
+        priceField = findViewById(R.id.editTextPreco)
+        brandField = findViewById(R.id.editTextMarca)
+        categoryField = findViewById(R.id.editTextCategoria)
+        yearField = findViewById(R.id.editTextAnoLancamento)
+        quantityField = findViewById(R.id.editTextQuantidade)
 
-        val categories = arrayOf("Hatch", "Sedan", "SUV", "Picape")
-        categorySpinner.adapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
-
-        val selectImageButton = findViewById<Button>(R.id.btnGaleria)
-        val takePhotoButton = findViewById<Button>(R.id.btnCamera)
-        val saveButton = findViewById<Button>(R.id.btnUpdateFields)
+        val selectImageButton = findViewById<ImageButton>(R.id.btnGaleria)
+        val takePhotoButton = findViewById<ImageButton>(R.id.btnCamera)
+        val saveButton = findViewById<Button>(R.id.btnFinalizarReposicao)
 
         selectImageButton.setOnClickListener {
             pickImage.launch("image/*")
@@ -85,11 +88,11 @@ class RestockingActivity : AppCompatActivity(), RestockingContract.View {
             val description = descriptionField.text.toString()
             val price = priceField.text.toString().toDoubleOrNull() ?: 0.0
             val brand = brandField.text.toString()
-            val category = categorySpinner.selectedItem.toString()
+            val category = categoryField.text.toString()
             val year = yearField.text.toString().toIntOrNull() ?: 0
             val quantity = quantityField.text.toString().toIntOrNull() ?: 0
 
-            if (name.isEmpty() || description.isEmpty() || price == 0.0 || brand.isEmpty() || year == 0 || quantity == 0) {
+            if (name.isEmpty() || description.isEmpty() || price == 0.0 || brand.isEmpty() || category.isEmpty() || year == 0 || quantity == 0) {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -108,12 +111,10 @@ class RestockingActivity : AppCompatActivity(), RestockingContract.View {
     }
 
     override fun showImageSelected() {
-        noImageText.visibility = android.view.View.GONE
         imageView.visibility = android.view.View.VISIBLE
     }
 
     override fun showNoImageSelected() {
-        noImageText.visibility = android.view.View.VISIBLE
         imageView.visibility = android.view.View.GONE
     }
 

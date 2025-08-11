@@ -5,6 +5,4 @@ interface VehiclesContract {
         fun navigateToHome()
         fun showError(message: String)
     }
-
-
 }

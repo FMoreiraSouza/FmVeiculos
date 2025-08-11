@@ -25,7 +25,7 @@ class VehiclesActivity : AppCompatActivity(), VehiclesContract.View {
         presenter = VehiclesPresenter()
 
         toolbar = findViewById(R.id.toolbar)
-        gridView = findViewById(R.id.gridView)
+        gridView = findViewById(R.id.vehiclesAdminGridView)
 
         toolbar.setNavigationOnClickListener {
             navigateToHome()
@@ -39,6 +39,6 @@ class VehiclesActivity : AppCompatActivity(), VehiclesContract.View {
     }
 
     override fun showError(message: String) {
-
+        android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show()
     }
 }

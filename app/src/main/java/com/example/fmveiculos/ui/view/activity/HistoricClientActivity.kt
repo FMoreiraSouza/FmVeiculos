@@ -34,13 +34,14 @@ class HistoricClientActivity : AppCompatActivity(), HistoricClientContract.View 
 
         recyclerView = findViewById(R.id.recyclerViewInterests)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = HistoricAdapter(mutableListOf()) { /* No action needed for client */ }
+        adapter = HistoricAdapter(mutableListOf())
         recyclerView.adapter = adapter
     }
 
     override fun onStart() {
         super.onStart()
-        presenter.loadInterests(AuthRepository().getCurrentUserEmail()?.let { AuthRepository().checkLoggedUser().toString() })
+        val userId = AuthRepository().getCurrentUser()?.uid
+        presenter.loadInterests(userId)
     }
 
     override fun displayInterests(interests: List<InterestModel>) {

@@ -35,11 +35,20 @@ class SquareAdapter(private val context: Context) : BaseAdapter() {
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.square_item, parent, false)
         val item = squareItems[position]
 
-        val imageView = view.findViewById<ImageView>(R.id.squareView)
+        val imageView = view.findViewById<ImageView>(R.id.squareIcon)
         val textView = view.findViewById<TextView>(R.id.squareName)
 
         imageView.setImageResource(item.imageRes)
         textView.text = item.title
+
+        val squareView = view.findViewById<View>(R.id.squareView)
+        squareView.setBackgroundColor(when (position) {
+            0 -> android.graphics.Color.RED
+            1 -> android.graphics.Color.GRAY
+            2 -> android.graphics.Color.GRAY
+            3 -> android.graphics.Color.RED
+            else -> android.graphics.Color.TRANSPARENT
+        })
 
         view.setOnClickListener {
             Navigator().navigateToActivity(context, item.activityClass)

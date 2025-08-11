@@ -33,7 +33,7 @@ class HistoricAdminActivity : AppCompatActivity(), HistoricAdminContract.View {
 
         recyclerView = findViewById(R.id.recyclerViewInterests)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = HistoricAdapter(mutableListOf()) { /* No action needed for admin */ }
+        adapter = HistoricAdapter(mutableListOf())
         recyclerView.adapter = adapter
     }
 

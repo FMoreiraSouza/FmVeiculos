@@ -15,9 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FMVeiculos"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.view.activity.HistoricAdminActivity"
-            android:exported="false" />
+        <activity android:name=".ui.view.activity.HistoricAdminActivity" />
         <activity android:name=".ui.view.activity.SendEmailActivity" />
         <activity android:name=".ui.view.activity.HistoricClientActivity" />
         <activity android:name=".ui.view.activity.SettingsActivity" />
