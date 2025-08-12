@@ -23,6 +23,7 @@ class InterestActivity : AppCompatActivity(), InterestContract.View {
     private lateinit var presenter: InterestPresenter
     private lateinit var gridView: GridView
     private lateinit var adapter: InterestAdapter
+    private var currentDialog: Dialog? = null // Para controlar o Dialog atual
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,45 +53,57 @@ class InterestActivity : AppCompatActivity(), InterestContract.View {
 
     override fun onStart() {
         super.onStart()
+        Log.d("InterestActivity", "onStart: Carregando interesses pendentes")
         presenter.loadPendingInterests()
     }
 
     override fun displayInterests(interests: List<InterestModel>) {
+        Log.d("InterestActivity", "displayInterests: Atualizando lista com ${interests.size} interesses")
         adapter.updateInterests(interests)
     }
 
     override fun showConfirmSuccess() {
+        Log.d("InterestActivity", "showConfirmSuccess: Interesse confirmado com sucesso")
         Toast.makeText(this, "Interesse confirmado com sucesso!", Toast.LENGTH_SHORT).show()
+        currentDialog?.dismiss() // Fecha o Dialog após o sucesso
+        currentDialog = null
     }
 
     override fun showCancelSuccess() {
+        Log.d("InterestActivity", "showCancelSuccess: Interesse cancelado com sucesso")
         Toast.makeText(this, "Interesse cancelado com sucesso!", Toast.LENGTH_SHORT).show()
+        currentDialog?.dismiss() // Fecha o Dialog após o sucesso
+        currentDialog = null
     }
 
     override fun showError(message: String) {
+        Log.d("InterestActivity", "showError: Erro - $message")
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        currentDialog?.dismiss() // Fecha o Dialog em caso de erro
+        currentDialog = null
     }
 
     override fun navigateToHome() {
+        Log.d("InterestActivity", "navigateToHome: Navegando para HomeAdminActivity")
         Navigator().navigateToActivity(this, HomeAdminActivity::class.java)
     }
 
     @SuppressLint("SetTextI18n", "MissingInflatedId", "InflateParams")
     private fun showConfirmationPopup(interest: InterestModel) {
+        Log.d("InterestActivity", "showConfirmationPopup: Exibindo popup para interesse ${interest.id}")
         val dialog = Dialog(this)
+        currentDialog = dialog
         val view = layoutInflater.inflate(R.layout.confirmation_popup, null)
         val confirmButton = view.findViewById<Button>(R.id.buttonYes)
         val cancelButton = view.findViewById<Button>(R.id.buttonNo)
-        val interestInfo = view.findViewById<TextView>(R.id.interests)
-        interestInfo.text = "Confirmar interesse de ${interest.name} no veículo ${interest.carName}?"
 
         confirmButton.setOnClickListener {
+            Log.d("InterestActivity", "showConfirmationPopup: Botão 'Sim' clicado para interesse ${interest.id}")
             presenter.confirmInterest(interest)
-            dialog.dismiss()
         }
         cancelButton.setOnClickListener {
+            Log.d("InterestActivity", "showConfirmationPopup: Botão 'Não' clicado para interesse ${interest.id}")
             presenter.cancelInterest(interest.id)
-            dialog.dismiss()
         }
 
         dialog.setContentView(view)

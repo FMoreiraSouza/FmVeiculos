@@ -11,8 +11,8 @@ interface CarDetailsHomeContract {
     }
 
     interface Presenter {
-        fun updateCarQuantity(carName: String, quantity: Int)
-        fun updateCarPrice(carName: String, price: Double)
-        fun getCarByName(carName: String): CarModel?
+        fun updateCarQuantity(carName: String, quantity: Int, onUpdate: (Int) -> Unit)
+        fun updateCarPrice(carName: String, price: Double, onUpdate: (Double) -> Unit)
+        suspend fun getCarByName(carName: String): CarModel?
     }
 }

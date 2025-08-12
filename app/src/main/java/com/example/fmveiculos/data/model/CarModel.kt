@@ -6,7 +6,7 @@ import com.example.fmveiculos.ui.view.activity.CarDetailsAdminActivity
 import com.example.fmveiculos.ui.view.activity.CarDetailsClientActivity
 
 data class CarModel(
-    val id: String = "",
+    var id: String = "",
     var name: String = "",
     var imageResource: String = "",
     var description: String = "",

@@ -16,6 +16,7 @@ interface RestockingContract {
     interface Presenter {
         fun setSelectedImage(uri: Uri?)
         fun setBitmapImage(bitmap: Bitmap?)
+        fun restoreDefaultImage()
         fun saveCar(car: CarModel)
     }
 }
