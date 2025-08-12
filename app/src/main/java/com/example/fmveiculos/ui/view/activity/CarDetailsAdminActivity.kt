@@ -85,7 +85,7 @@ class CarDetailsAdminActivity : AppCompatActivity(), CarDetailsHomeContract.View
         return spannableString
     }
 
-    @SuppressLint("InflateParams")
+    @SuppressLint("InflateParams", "DefaultLocale")
     private fun showUpdatePopup(carName: String) {
         val dialog = Dialog(this)
         val view = layoutInflater.inflate(R.layout.popup_update, null)

@@ -140,7 +140,7 @@ class CarDetailsClientActivity : AppCompatActivity(), CarDetailsClientContract.V
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = "https://wa.me/$phoneNumber".toUri()
             startActivity(intent)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             showWhatsAppError()
         }
     }
