@@ -1,51 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:orientation="vertical"
-    android:backgroundTint="@color/colorPrimary"
     android:background="@android:color/white"
+    android:backgroundTint="@color/colorPrimary"
+    android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirmação"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:gravity="center"
+        android:text="@string/confirmação"
         android:textColor="@android:color/white"
-        android:gravity="center"/>
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="O cliente confirmou o interesse no veículo?"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:gravity="center"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:text="@string/o_cliente_confirmou_o_interesse_no_veículo"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonYes"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sim"
-            android:textColor="@android:color/white"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginEnd="16dp"
+            android:text="@string/sim"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/buttonNo"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:text="Não"/>
-
+            android:text="@string/não"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>

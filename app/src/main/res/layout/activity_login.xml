@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f5f5"
-    tools:context=".ui.view.auth.LoginActivity">
+    tools:context=".ui.view.activity.LoginActivity">
 
     <LinearLayout
         android:id="@+id/logoContainer"
@@ -21,7 +22,6 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
             android:textSize="48sp" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -38,7 +38,7 @@
             android:id="@+id/emailLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="@string/email"
             android:textColor="#000000"
             android:textSize="16sp" />
 
@@ -46,28 +46,29 @@
             android:id="@+id/emailField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Digite seu email"
+            android:hint="@string/digite_seu_email"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:textColor="@android:color/black"
             android:textColorHint="#808080"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/emailErrorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/email_vazio"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="12sp"
-            android:visibility="gone"
-            android:layout_marginTop="4dp"
-            android:text="Email vazio" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/passwordLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Senha"
+            android:text="@string/senha"
             android:textColor="#000000"
             android:textSize="16sp" />
 
@@ -75,21 +76,22 @@
             android:id="@+id/passwordField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Digite sua senha"
+            android:hint="@string/digite_sua_senha"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
             android:textColor="@android:color/black"
             android:textColorHint="#808080"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/passwordErrorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/senha_vazia"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="12sp"
-            android:visibility="gone"
-            android:layout_marginTop="4dp"
-            android:text="Senha vazia" />
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/loginButton"
@@ -98,7 +100,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/colorPrimary"
-            android:text="Entrar"
+            android:text="@string/entrar"
             android:textColor="#FFFFFF" />
 
         <TextView
@@ -107,10 +109,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="Esqueceu a senha?"
+            android:text="@string/esqueceu_a_senha"
             android:textColor="#808080"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="match_parent"
@@ -124,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:text="Ainda não é nosso cliente?"
+            android:text="@string/ainda_não_é_nosso_cliente"
             android:textColor="#808080"
             android:textSize="16sp" />
 
@@ -134,9 +136,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:text="Cadastre-se"
+            android:text="@string/cadastre_se"
             android:textColor="#808080"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

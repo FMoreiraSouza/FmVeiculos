@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".ui.view.activity.SendEmailActivity">
 
-    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -19,21 +20,19 @@
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enviar Email"
+            android:layout_gravity="center"
+            android:text="@string/enviar_email"
             android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:layout_gravity="center" />
-
+            android:textSize="20sp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Campo de Entrada de Email -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:layout_marginTop="16dp"
-        android:hint="Email"
+        android:hint="@string/email"
         android:padding="16dp"
         app:hintTextColor="@color/colorPrimary">
 
@@ -53,8 +52,7 @@
         android:layout_below="@id/emailInputLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Enviar Email"
         android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"/>
-
+        android:text="@string/enviar_email"
+        android:textColor="@android:color/white" />
 </RelativeLayout>

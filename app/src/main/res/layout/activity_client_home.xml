@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".ui.view.home.HomeClientActivity">
+    tools:context=".ui.view.activity.HomeClientActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,10 +24,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Cliente"
+                android:text="@string/cliente"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
-
         </androidx.appcompat.widget.Toolbar>
 
         <GridView
@@ -37,12 +36,11 @@
             android:layout_below="@id/toolbar"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:horizontalSpacing="40dp"
             android:gravity="center_horizontal"
+            android:horizontalSpacing="40dp"
             android:numColumns="2"
             android:padding="8dp"
             android:verticalSpacing="50dp" />
-
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -54,5 +52,4 @@
         app:itemIconTint="@color/color_selector"
         app:itemTextColor="@color/color_selector"
         app:menu="@menu/drawer_menu" />
-
 </androidx.drawerlayout.widget.DrawerLayout>

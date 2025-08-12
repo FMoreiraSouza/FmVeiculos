@@ -6,15 +6,14 @@
     android:background="@drawable/card_background"
     android:padding="8dp">
 
-    <!-- Ícone -->
     <ImageView
         android:id="@+id/squareIcon"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
+        android:importantForAccessibility="no"
         android:scaleType="centerInside" />
 
-    <!-- Nome do item -->
     <TextView
         android:id="@+id/squareName"
         android:layout_width="wrap_content"
@@ -26,7 +25,6 @@
         android:textSize="14sp"
         android:textStyle="bold" />
 
-    <!-- Fundo colorido -->
     <View
         android:id="@+id/squareView"
         android:layout_width="128dp"
@@ -34,5 +32,4 @@
         android:layout_below="@id/squareName"
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent" />
-
 </RelativeLayout>

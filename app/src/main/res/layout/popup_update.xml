@@ -8,23 +8,24 @@
         android:id="@+id/tvAvailableLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Disponíveis:"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp" />
+        android:text="@string/disponíveis"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/edtAvailable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvAvailableLabel"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:hint="Disponíveis"
+        android:hint="@string/disponíveis"
+        android:importantForAutofill="no"
         android:inputType="number" />
 
     <Button
@@ -32,34 +33,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/edtAvailable"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/colorPrimary"
-        android:text="Atualizar quantidade"
+        android:text="@string/atualizar_quantidade"
         android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/tvPriceLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Preço"
-        android:textSize="18sp"
-        android:textStyle="bold"
         android:layout_below="@id/btnUpdateQuantity"
         android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="8dp" />
+        android:text="@string/preço"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/edtPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvPriceLabel"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:hint="Preço"
+        android:hint="@string/preço"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal" />
 
     <Button
@@ -67,11 +69,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/edtPrice"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/colorPrimary"
-        android:text="Atualizar valor"
+        android:text="@string/atualizar_valor"
         android:textColor="#FFFFFF" />
-
 </RelativeLayout>
