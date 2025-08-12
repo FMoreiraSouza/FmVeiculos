@@ -36,7 +36,7 @@ class RegisterPresenter(
             if (success) {
                 val userId = authRepository.getCurrentUser()?.uid ?: ""
                 val userInfo = UserInfoModel(
-                    id = userId, // Usa o UID do Firebase como ID
+                    id = userId,
                     name = name,
                     cpf = cpf,
                     city = city,

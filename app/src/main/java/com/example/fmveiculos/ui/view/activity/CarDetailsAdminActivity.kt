@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.StyleSpan
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -43,8 +42,6 @@ class CarDetailsAdminActivity : AppCompatActivity(), CarDetailsHomeContract.View
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_details_home)
 
-        Log.d("CarDetailsDebug", "onCreate: Iniciando CarDetailsAdminActivity")
-
         presenter = CarDetailsAdminPresenter(this, CarRepository())
 
         toolbar = findViewById(R.id.toolbar)
@@ -58,7 +55,6 @@ class CarDetailsAdminActivity : AppCompatActivity(), CarDetailsHomeContract.View
         btnUpdateFields = findViewById(R.id.btnUpdateFields)
 
         toolbar.setNavigationOnClickListener {
-            Log.d("CarDetailsDebug", "onCreate: Clicou na navegação da toolbar")
             navigateToVehicles()
         }
 
@@ -70,8 +66,6 @@ class CarDetailsAdminActivity : AppCompatActivity(), CarDetailsHomeContract.View
         val carDescription = intent.getStringExtra("carDescription")
         val carCategory = intent.getStringExtra("carCategory")
 
-        Log.d("CarDetailsDebug", "onCreate: Dados recebidos da Intent - carName: $carName, carBrand: $carBrand, carQuantity: $carQuantity, carPrice: $carPrice, carDescription: $carDescription, carCategory: $carCategory")
-
         Glide.with(this).load(carImageResource).fitCenter().into(carImageView)
         carNameTextView.text = createStyledText("", carName)
         carBrandTextView.text = createStyledText("Marca: ", carBrand)
@@ -81,7 +75,6 @@ class CarDetailsAdminActivity : AppCompatActivity(), CarDetailsHomeContract.View
         carPriceTextView.text = createStyledText("Preço: R$ ", String.format("%.2f", carPrice))
 
         btnUpdateFields.setOnClickListener {
-            Log.d("CarDetailsDebug", "onCreate: Botão de atualizar campos clicado, chamando showUpdatePopup com carName: $carName")
             showUpdatePopup(carName ?: "")
         }
     }
@@ -94,7 +87,6 @@ class CarDetailsAdminActivity : AppCompatActivity(), CarDetailsHomeContract.View
 
     @SuppressLint("InflateParams")
     private fun showUpdatePopup(carName: String) {
-        Log.d("CarDetailsDebug", "showUpdatePopup: Iniciando popup para carName: $carName")
         val dialog = Dialog(this)
         val view = layoutInflater.inflate(R.layout.popup_update, null)
         val edtAvailable = view.findViewById<EditText>(R.id.edtAvailable)
@@ -103,22 +95,17 @@ class CarDetailsAdminActivity : AppCompatActivity(), CarDetailsHomeContract.View
         val btnUpdatePrice = view.findViewById<Button>(R.id.btnUpdatePrice)
 
         CoroutineScope(Dispatchers.Main).launch {
-            Log.d("CarDetailsDebug", "showUpdatePopup: Buscando carro com presenter.getCarByName para carName: $carName")
             presenter.getCarByName(carName)?.let { car ->
-                Log.d("CarDetailsDebug", "showUpdatePopup: Carro encontrado - name: ${car.name}, id: ${car.id}, quantity: ${car.quantity}, price: ${car.price}")
                 edtAvailable.setText(car.quantity.toString())
                 edtPrice.setText(car.price.toString())
             } ?: run {
-                Log.d("CarDetailsDebug", "showUpdatePopup: Carro não encontrado para carName: $carName")
                 showUpdateError("Carro não encontrado")
             }
         }
 
         btnUpdateQuantity.setOnClickListener {
             val newQuantity = edtAvailable.text.toString().toIntOrNull()
-            Log.d("CarDetailsDebug", "showUpdatePopup: Botão de atualizar quantidade clicado, newQuantity: $newQuantity")
             if (newQuantity != null) {
-                Log.d("CarDetailsDebug", "showUpdatePopup: Chamando presenter.updateCarQuantity para carName: $carName, newQuantity: $newQuantity")
                 presenter.updateCarQuantity(carName, newQuantity) { updatedQuantity ->
                     carQuantityTextView.text = createStyledText("Disponíveis: ", updatedQuantity.toString())
                     dialog.dismiss()
@@ -130,9 +117,7 @@ class CarDetailsAdminActivity : AppCompatActivity(), CarDetailsHomeContract.View
 
         btnUpdatePrice.setOnClickListener {
             val newPrice = edtPrice.text.toString().toDoubleOrNull()
-            Log.d("CarDetailsDebug", "showUpdatePopup: Botão de atualizar preço clicado, newPrice: $newPrice")
             if (newPrice != null) {
-                Log.d("CarDetailsDebug", "showUpdatePopup: Chamando presenter.updateCarPrice para carName: $carName, newPrice: $newPrice")
                 presenter.updateCarPrice(carName, newPrice) { updatedPrice ->
                     carPriceTextView.text = createStyledText("Preço: R$ ", String.format("%.2f", updatedPrice))
                     dialog.dismiss()
@@ -147,22 +132,18 @@ class CarDetailsAdminActivity : AppCompatActivity(), CarDetailsHomeContract.View
     }
 
     override fun showQuantityUpdated() {
-        Log.d("CarDetailsDebug", "showQuantityUpdated: Exibindo mensagem de sucesso para quantidade")
         Toast.makeText(this, "Quantidade atualizada com sucesso!", Toast.LENGTH_SHORT).show()
     }
 
     override fun showPriceUpdated() {
-        Log.d("CarDetailsDebug", "showPriceUpdated: Exibindo mensagem de sucesso para preço")
         Toast.makeText(this, "Preço atualizado com sucesso!", Toast.LENGTH_SHORT).show()
     }
 
     override fun showUpdateError(message: String) {
-        Log.d("CarDetailsDebug", "showUpdateError: Erro exibido na UI - message: $message")
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun navigateToVehicles() {
-        Log.d("CarDetailsDebug", "navigateToVehicles: Navegando para VehiclesActivity")
         Navigator().navigateToActivity(this, VehiclesActivity::class.java)
     }
 }

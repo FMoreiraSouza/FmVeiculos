@@ -17,7 +17,7 @@ class Masks(private val editText: EditText) : TextWatcher {
         if (isUpdating) return
 
         isUpdating = true
-        val unmasked = s.toString().replace("[^0-9]".toRegex(), "").take(11) // Limita a 11 dígitos
+        val unmasked = s.toString().replace("[^0-9]".toRegex(), "").take(11)
         val masked = StringBuilder()
 
         var i = 0

@@ -49,22 +49,18 @@ class InterestAdapter(
         }
 
         val interest = getItem(position) as InterestModel
-        Log.d("InterestAdapter", "getView: Configurando item para interesse ${interest.id}")
         viewHolder.userNameTextView.text = interest.name
         viewHolder.carNameTextView.text = interest.carName
         viewHolder.carPriceTextView.text = "R$ ${String.format("%.2f", interest.carPrice)}"
         viewHolder.dateTextView.text = formatTimestamp(interest.timestamp)
         viewHolder.confirmButton.setOnClickListener {
-            Log.d("InterestAdapter", "getView: Botão de confirmação clicado para interesse ${interest.id}")
             onItemClick(interest, "confirm")
         }
-
         return view
     }
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateInterests(newInterests: List<InterestModel>) {
-        Log.d("InterestAdapter", "updateInterests: Atualizando lista com ${newInterests.size} interesses")
         interests.clear()
         interests.addAll(newInterests)
         notifyDataSetChanged()
@@ -76,8 +72,7 @@ class InterestAdapter(
         return try {
             val date = dateFormatFirebase.parse(firebaseTimestamp)
             date?.let { dateFormat.format(it) } ?: "Data Inválida"
-        } catch (e: Exception) {
-            Log.e("InterestAdapter", "formatTimestamp: Erro ao formatar timestamp - ${e.message}")
+        } catch (_: Exception) {
             "Data Inválida"
         }
     }
