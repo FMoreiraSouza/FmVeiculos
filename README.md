@@ -1,4 +1,3 @@
-<img src="media/logo.png" alt="FMVeículos Logo"/>
 
 # FMVeículos App
 
