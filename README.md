@@ -1,3 +1,5 @@
+<img src="media/logo.png" alt="FMVeículos Logo"/>
+
 # FMVeículos App
 
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.2.0-purple?logo=kotlin)
@@ -6,11 +8,13 @@
 
 ## 📃 Descrição
 
-O **FMVeículos App** é um aplicativo Android desenvolvido em **Kotlin** para gerenciar vendas e interesses em veículos de uma concessionária. Ele utiliza o **Firebase** para autenticação, armazenamento de dados e imagens, oferecendo uma experiência fluida para administradores e clientes.
+O **FMVeículos App** é um aplicativo Android desenvolvido em **Kotlin** para gerenciar vendas e interesses em veículos de uma concessionária. Ele utiliza o **[Firebase](https://firebase.google.com/)** para autenticação, armazenamento de dados e imagens, oferecendo uma experiência fluida para administradores e clientes.
 
 O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, garantindo separação de responsabilidades, manutenção simplificada e escalabilidade. A interface é responsiva, com layouts adaptados para diferentes tamanhos de tela, e inclui animações para melhorar a experiência do usuário.
 
-<img src="media/app_screenshot.png" alt="FMVeículos App" width="200"/>
+Assista à apresentação do projeto:  
+- [Parte 1](https://youtu.be/jwXPy-maq4Q)  
+- [Parte 2](https://youtu.be/EmIp1Qk3-Ik)
 
 ---
 
@@ -18,7 +22,7 @@ O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, garantindo separ
 
 - **Kotlin 2.2.0** → Linguagem de programação principal.
 - **Android Gradle Plugin 8.11.1** → Desenvolvimento nativo para Android.
-- **Firebase**:
+- **Firebase** [](https://firebase.google.com/):
   - **Authentication 23.2.1** → Gerenciamento de login e registro.
   - **Firestore 25.1.4** → Banco de dados NoSQL para carros e interesses.
   - **Storage 22.0.0** → Armazenamento de imagens de veículos.
@@ -89,18 +93,15 @@ O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, garantindo separ
 
 ## ▶️ Como Rodar o Projeto
 
-```bash
-# 1. Clone o repositório
-git clone https://github.com/seu-user/fmveiculos-app.git
-cd fmveiculos-app
+### Pré-requisitos
+- **Android Studio** (versão mais recente, recomendada: Koala ou superior).
+- **JDK 17** ou superior.
+- Conta no **[Firebase](https://firebase.google.com/)** para autenticação e banco de dados.
+- **Emulador Android** ou dispositivo físico com Android 5.0+.
+- **ADB** (Android Debug Bridge) configurado para conexão com dispositivos.
 
-# 2. Instale as dependências
-./gradlew build
-
-# 3. Configure o Firebase
-# - Adicione o arquivo google-services.json na pasta app/
-# - Configure as credenciais no console do Firebase
-
-# 4. Rode o app
-./gradlew installDebug
-adb shell am start -n com.example.fmveiculos/.ui.view.activity.MainActivity
+### Passos para Executar no Android Studio
+1. **Clone o Repositório**:
+   ```bash
+   git clone https://github.com/seu-user/fmveiculos-app.git
+   cd fmveiculos-app
