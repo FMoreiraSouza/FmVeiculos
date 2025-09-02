@@ -1,106 +1,145 @@
+<img src="media/logo.png" alt="FMVeículos Logo"/>
 
-# FMVeículos App
-
-![Kotlin](https://img.shields.io/badge/Kotlin-2.2.0-purple?logo=kotlin)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.2.0-blue?logo=kotlin)
 
 ---
 
 ## 📃 Descrição
 
-O **FMVeículos App** é um aplicativo Android desenvolvido em **Kotlin** para gerenciar vendas e interesses em veículos de uma concessionária. Ele utiliza o **[Firebase](https://firebase.google.com/)** para autenticação, armazenamento de dados e imagens, oferecendo uma experiência fluida para administradores e clientes.
+O **FMVeículos App** é um aplicativo Android desenvolvido em **Kotlin** para gerenciamento de uma concessionária de veículos. Ele permite que clientes visualizem veículos disponíveis, registrem interesses de compra, e que administradores gerenciem o estoque, confirmem ou cancelem interesses, e visualizem relatórios de vendas. O aplicativo utiliza o **Firebase** para autenticação, armazenamento de dados e imagens, garantindo uma experiência integrada e em tempo real.
 
-O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, garantindo separação de responsabilidades, manutenção simplificada e escalabilidade. A interface é responsiva, com layouts adaptados para diferentes tamanhos de tela, e inclui animações para melhorar a experiência do usuário.
-
-Assista à apresentação do projeto:  
-- [Parte 1](https://youtu.be/jwXPy-maq4Q)  
-- [Parte 2](https://youtu.be/EmIp1Qk3-Ik)
+O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, com separação clara de responsabilidades, facilitando a manutenção e escalabilidade. A interface é projetada para ser intuitiva, com suporte a navegação fluida e responsividade para diferentes tamanhos de tela.
 
 ---
 
 ## 💻 Tecnologias Utilizadas
 
-- **Kotlin 2.2.0** → Linguagem de programação principal.
-- **Android Gradle Plugin 8.11.1** → Desenvolvimento nativo para Android.
-- **Firebase** [](https://firebase.google.com/):
-  - **Authentication 23.2.1** → Gerenciamento de login e registro.
-  - **Firestore 25.1.4** → Banco de dados NoSQL para carros e interesses.
-  - **Storage 22.0.0** → Armazenamento de imagens de veículos.
-- **Glide 4.16.0** → Carregamento eficiente de imagens.
-- **AAChartCore-Kotlin 7.2.3** → Gráficos para relatórios de vendas.
-- **Coroutines** → Gerenciamento de operações assíncronas (integrado ao Kotlin).
+- **Kotlin** → Linguagem de programação principal.
+- **Android SDK** → Desenvolvimento nativo para Android.
+- **Firebase** → Autenticação, Firestore (banco de dados), Storage (imagens). [Saiba mais sobre Firebase](https://firebase.google.com/).
+- **Glide** → Carregamento e exibição de imagens.
+- **AAChartModel** → Geração de gráficos para relatórios de vendas.
+- **Coroutines** → Gerenciamento de operações assíncronas.
 - **MVP Architecture** → Separação entre Model, View e Presenter.
-- **Navigation** → Navegação centralizada com a classe `Navigator`.
-- **AndroidX**:
-  - **Core KTX 1.16.0** → Extensões Kotlin para Android.
-  - **AppCompat 1.7.1** → Compatibilidade com versões anteriores do Android.
-  - **Material 1.12.0** → Componentes de interface Material Design.
-  - **Activity 1.10.1** → Gerenciamento de atividades.
-  - **ConstraintLayout 2.2.1** → Layouts flexíveis.
-  - **GridLayout 1.1.0** → Layouts em grade.
+- **Navigation Component** → Navegação entre telas.
+- **RecyclerView e GridView** → Exibição de listas e grades de dados.
 
 ---
 
 ## 🛎️ Funcionalidades
 
 ### 🔹 Autenticação
-- **Login** e **Registro** com validação de CPF e email.
-- Suporte a recuperação de senha via email.
-- Diferenciação entre usuários administradores (domínio @fmveiculos.com) e clientes.
+- Login e registro de usuários com validação de CPF.
+- Recuperação de senha via e-mail.
+- Diferenciação entre usuários administradores (@fmveiculos.com) e clientes.
 
 ### 🔹 Gerenciamento de Veículos
-- **Catálogo de Veículos**:
-  - Exibe lista de veículos em um GridView com imagens, nomes e detalhes.
-  - Suporte a clique para visualizar detalhes completos (marca, preço, descrição, categoria, ano de lançamento).
-- **Reposição de Estoque**:
-  - Cadastro de novos veículos com upload de imagens (galeria ou câmera).
-  - Atualização de quantidade e preço de veículos existentes.
+- **Clientes**:
+  - Visualização do catálogo de veículos com imagens, preços e detalhes.
+  - Registro de interesse em veículos.
+  - Integração com WhatsApp para contato direto com a concessionária.
+- **Administradores**:
+  - Adição de novos veículos ao estoque com upload de imagens (galeria ou câmera).
+  - Atualização de preço e quantidade de veículos.
+  - Visualização do catálogo completo.
 
-### 🔹 Registro de Interesses
-- Clientes podem registrar interesse em veículos.
-- Administradores podem confirmar ou cancelar interesses pendentes.
-- Exibição de histórico de interesses com status (Pendente, Confirmado, Cancelado).
+### 🔹 Gerenciamento de Interesses
+- **Clientes**:
+  - Visualização do histórico de interesses.
+- **Administradores**:
+  - Visualização, confirmação ou cancelamento de interesses pendentes.
+  - Atualização automática do estoque ao confirmar interesses.
 
 ### 🔹 Relatórios
-- Gráficos de interesses confirmados por mês, gerados com AAChartCore-Kotlin.
-- Visualização detalhada de interesses em uma RecyclerView.
+- Gráficos de interesses confirmados por mês, exibidos em uma interface interativa.
 
-### 🔹 Experiência do Usuário
-- **Responsividade**:
-  - Layouts adaptados com `ViewCompat` e `WindowInsetsCompat` para telas edge-to-edge.
-- **Animações**:
-  - Efeitos de destaque em botões e transições suaves entre telas.
-- **Formatação**:
-  - Máscara de CPF automática no registro.
-  - Formatação de preços e datas para melhor legibilidade.
-- **Integração com WhatsApp**:
-  - Botão para contato direto via WhatsApp com número predefinido.
+### 🔹 Navegação
+- Navegação intuitiva com toolbar e drawer (clientes).
+- Transições animadas entre telas.
 
-### 🔹 Gerenciamento de Estado
-- Estados de **Loading**, **Success**, **Error** e **No Data** para operações assíncronas.
-- Feedback via Toast para ações do usuário (ex.: sucesso no login, erro no cadastro).
+### 🔹 Validações
+- Máscara de CPF no cadastro.
+- Validação de CPF utilizando algoritmo de dígitos verificadores.
+- Verificação de campos obrigatórios em formulários.
 
 ---
 
 ## 📱 Responsividade
 
-- Uso de `ViewCompat` e `WindowInsetsCompat` para suporte a telas edge-to-edge.
-- Layouts baseados em `GridView` e `RecyclerView` para exibição dinâmica.
-- A classe `Navigator` centraliza a navegação, garantindo transições consistentes.
-- Textos e imagens ajustados dinamicamente com `SpannableString` para estilização.
+- **GridView** e **RecyclerView** adaptam-se a diferentes tamanhos de tela.
+- Imagens carregadas com **Glide** ajustam-se automaticamente para otimizar performance.
+- Layouts otimizados com **ConstraintLayout** para garantir consistência em dispositivos variados.
 
 ---
 
 ## ▶️ Como Rodar o Projeto
 
 ### Pré-requisitos
-- **Android Studio** (versão mais recente, recomendada: Koala ou superior).
+- **Android Studio** (versão recomendada: Koala ou mais recente).
 - **JDK 17** ou superior.
-- Conta no **[Firebase](https://firebase.google.com/)** para autenticação e banco de dados.
 - **Emulador Android** ou dispositivo físico com Android 5.0+.
-- **ADB** (Android Debug Bridge) configurado para conexão com dispositivos.
+- Conta no [Firebase](https://firebase.google.com/) configurada com o projeto.
 
-### Passos para Executar no Android Studio
-1. **Clone o Repositório**:
+### Clone o repositório
+
+- git clone https://github.com/seu-user/fmveiculos-app.git
+- cd fmveiculos-app
+
+### Sincronize o projeto no Android Studio
+
+- Abra o **Android Studio**.
+-  Selecione **File > Open** e escolha a pasta do projeto.
+- Aguarde a sincronização do **Gradle**.
+
+### Configure o Firebase
+
+1. Acesse o **Firebase Console**.
+2. Crie um novo projeto e adicione o aplicativo Android.
+3. Baixe o arquivo `google-services.json` e coloque-o na pasta `app/` do projeto.
+4. Habilite os serviços de **Authentication**, **Firestore** e **Storage** no Firebase Console.
+
+### Instale as dependências
+
+- No Android Studio, clique em **Sync Project with Gradle Files** para baixar as dependências.
+
+### Emulador
+- No Android Studio, abra o **Device Manager** (ícone de celular no canto superior direito).
+- Crie um novo dispositivo virtual (recomendado: **Pixel 6 com API 33**).
+- Inicie o emulador clicando no botão de **play**.
+
+### Dispositivo físico
+
+#### Via cabo USB
+- Habilite o **Modo Desenvolvedor** no dispositivo (Configurações > Sobre o telefone > Toque 7 vezes no número da versão).
+- Ative a **Depuração USB** em Configurações > Sistema > Opções do desenvolvedor.
+- Conecte o dispositivo ao computador via cabo USB.
+
+#### Via Wi-Fi
+- No Android Studio, vá para **File > Settings > Appearance & Behavior > System Settings > Android SDK**.
+- Instale o **Android 11 (R)** ou superior.
+- No dispositivo, vá para **Opções do desenvolvedor > Depuração sem fio**.
+- Use a opção **Pair device with QR code** ou **Pair device with pairing code** para conectar.
+- Escaneie o QR code ou insira o código no Android Studio (View > Tool Windows > Device Manager > Pair Devices Using Wi-Fi).
+
+## Rode o app
+
+- Selecione o dispositivo/emulador no menu suspenso ao lado do botão **Run**.
+- Clique em **Run** (ícone de play verde) ou use o comando:
    ```bash
-   git clone https://github.com/seu-user/fmveiculos-app.git
-   cd fmveiculos-app
+   ./gradlew run
+   
+---
+
+## 🎥 Apresentação do Aplicativo
+
+Confira a apresentação do aplicativo em duas partes:  
+
+- [Parte 1](https://youtu.be/jwXPy-maq4Q)  
+- [Parte 2](https://youtu.be/EmIp1Qk3-Ik)  
+
+---
+
+## 📝 Notas
+- Certifique-se de que o dispositivo/emulador tenha conexão com a internet para acessar o **Firebase**.  
+- O domínio **@fmveiculos.com** é reservado para administradores.  
+- Para testes, utilize um dispositivo com **API 21** ou superior.
