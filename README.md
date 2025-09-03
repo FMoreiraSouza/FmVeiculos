@@ -86,7 +86,7 @@ O **FMVeículos** é um aplicativo Android desenvolvido em **Kotlin** para geren
 
 ### Clone o repositório
 
-- git clone URL do projeto
+- git clone <URL_DO_PROJETO>
 
 ### Sincronize o projeto no Android Studio
 
