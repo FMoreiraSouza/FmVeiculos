@@ -81,7 +81,7 @@ O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, com separação 
 
 ### Clone o repositório
 
-- git clone url do projeto
+- git clone URL do projeto
 
 ### Sincronize o projeto no Android Studio
 
