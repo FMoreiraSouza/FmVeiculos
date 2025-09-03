@@ -16,7 +16,7 @@ O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, com separação 
 
 - **Kotlin** → Linguagem de programação principal.
 - **Android SDK** → Desenvolvimento nativo para Android.
-- **Firebase** → Autenticação, Firestore (banco de dados), Storage (imagens). [Saiba mais sobre Firebase](https://firebase.google.com/).
+- **Firebase** → Autenticação, Firestore (banco de dados), Storage (imagens).
 - **Glide** → Carregamento e exibição de imagens.
 - **AAChartModel** → Geração de gráficos para relatórios de vendas.
 - **Coroutines** → Gerenciamento de operações assíncronas.
@@ -81,8 +81,8 @@ O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, com separação 
 
 ### Clone o repositório
 
-- git clone https://github.com/seu-user/FMVeiculos.git
-- cd fmveiculos-app
+- git clone url do projeto
+- cd FMVeiculos
 
 ### Sincronize o projeto no Android Studio
 
