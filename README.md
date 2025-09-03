@@ -81,7 +81,7 @@ O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, com separação 
 
 ### Clone o repositório
 
-- git clone https://github.com/seu-user/fmveiculos-app.git
+- git clone https://github.com/seu-user/FMVeiculos.git
 - cd fmveiculos-app
 
 ### Sincronize o projeto no Android Studio
