@@ -6,7 +6,7 @@
 
 ## 📃 Descrição
 
-O **FMVeículos App** é um aplicativo Android desenvolvido em **Kotlin** para gerenciamento de uma concessionária de veículos. Ele permite que clientes visualizem veículos disponíveis, registrem interesses de compra, e que administradores gerenciem o estoque, confirmem ou cancelem interesses, e visualizem relatórios de vendas. O aplicativo utiliza o **Firebase** para autenticação, armazenamento de dados e imagens, garantindo uma experiência integrada e em tempo real.
+O **FMVeículos** é um aplicativo Android desenvolvido em **Kotlin** para gerenciamento de uma concessionária de veículos. Ele permite que clientes visualizem veículos disponíveis, registrem interesses de compra, e que administradores gerenciem o estoque, confirmem ou cancelem interesses, e visualizem relatórios de vendas. O aplicativo utiliza o **Firebase** para autenticação, armazenamento de dados e imagens, garantindo uma experiência integrada e em tempo real.
 
 O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, com separação clara de responsabilidades, facilitando a manutenção e escalabilidade. A interface é projetada para ser intuitiva, com suporte a navegação fluida e responsividade para diferentes tamanhos de tela.
 
