@@ -20,7 +20,6 @@ O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, com separação 
 - **Glide** → Carregamento e exibição de imagens.
 - **AAChartModel** → Geração de gráficos para relatórios de vendas.
 - **Coroutines** → Gerenciamento de operações assíncronas.
-- **MVP Architecture** → Separação entre Model, View e Presenter.
 - **Navigation Component** → Navegação entre telas.
 - **RecyclerView e GridView** → Exibição de listas e grades de dados.
 
