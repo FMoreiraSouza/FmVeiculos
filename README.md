@@ -121,7 +121,7 @@ O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, com separação 
 - Use a opção **Pair device with QR code** ou **Pair device with pairing code** para conectar.
 - Escaneie o QR code ou insira o código no Android Studio (View > Tool Windows > Device Manager > Pair Devices Using Wi-Fi).
 
-## Rode o app
+### Rode o app
 
 - Selecione o dispositivo/emulador no menu suspenso ao lado do botão **Run**.
 - Clique em **Run** (ícone de play verde) ou use o comando:
@@ -135,11 +135,4 @@ O projeto segue uma arquitetura **MVP (Model-View-Presenter)**, com separação 
 Confira a apresentação do aplicativo em duas partes:  
 
 - [Parte 1](https://youtu.be/jwXPy-maq4Q)  
-- [Parte 2](https://youtu.be/EmIp1Qk3-Ik)  
-
----
-
-## 📝 Notas
-- Certifique-se de que o dispositivo/emulador tenha conexão com a internet para acessar o **Firebase**.  
-- O domínio **@fmveiculos.com** é reservado para administradores.  
-- Para testes, utilize um dispositivo com **API 21** ou superior.
+- [Parte 2](https://youtu.be/EmIp1Qk3-Ik)
