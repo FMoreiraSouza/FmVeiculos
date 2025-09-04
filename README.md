@@ -1,4 +1,6 @@
-<img src="media/Logo.png" alt="Logo"/>
+<p align="center">
+  <img src="media/Logo.png" alt="Logo"/>
+</p>
 
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.2.0-blue?logo=kotlin)
 
