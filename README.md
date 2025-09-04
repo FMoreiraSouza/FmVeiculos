@@ -1,4 +1,4 @@
-<img src="media/Logo.png" alt="FMVeículos Logo"/>
+<img src="media/Logo.png" alt="Logo"/>
 
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.2.0-blue?logo=kotlin)
 
